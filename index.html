@@ -9,10 +9,10 @@
 <meta property="og:description" content="Modelagem econômico-financeira de concessões e PPPs, do WACC à TIR do projeto.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.valorappp.com.br/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B1F3B'/%3E%3Cpath d='M8 9l8 15 8-15' fill='none' stroke='%23C9D6E5' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -20 120 110'%3E%3Crect x='-8' y='-20' width='120' height='110' rx='16' fill='%23F2F5F8'/%3E%3Cg fill='%230B1F3B'%3E%3Crect x='0' y='0' width='12' height='46'/%3E%3Crect x='18' y='10' width='12' height='46'/%3E%3Crect x='36' y='20' width='12' height='46'/%3E%3C/g%3E%3Cg fill='%23C9962E'%3E%3Cpolygon points='55,42 67,35 67,63 55,70'/%3E%3Cpolygon points='73,25 85,18 85,55 73,62'/%3E%3Cpolygon points='91,7 103,1 103,46 91,53'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #0B1F3B;
@@ -21,9 +21,10 @@
     --mist: #C9D6E5;
     --paper: #F2F5F8;
     --white: #FFFFFF;
-    --amber: #E3A55A;
+    --gold: #C9962E;
+    --gold-hover: #B5841F;
     --ink: #0B1F3B;
-    --ink-soft: #3D5270;
+    --ink-soft: #46597A;
     --line: #D5DFEA;
     --max: 1120px;
   }
@@ -33,92 +34,73 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Archivo", system-ui, sans-serif;
-    font-size: 1.0625rem;
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 1.125rem;
     line-height: 1.6;
     font-variant-numeric: tabular-nums;
   }
+  h1, h2, h3, .name, .btn { font-family: "Montserrat", system-ui, sans-serif; }
   a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
   /* Cabeçalho */
-  .top {
-    background: var(--navy);
-    color: var(--white);
+  .top { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand .mark { width: 40px; height: auto; flex: none; }
+  .wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+  .wordmark .name { font-weight: 800; font-size: 1.35rem; color: var(--navy); letter-spacing: -0.01em; }
+  .wordmark .tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); margin-top: 3px; }
+  .top nav { display: flex; gap: 28px; align-items: center; font-size: 1rem; }
+  .top nav a { text-decoration: none; color: var(--ink-soft); font-weight: 600; }
+  .top nav a:hover { color: var(--navy); }
+  .top nav .login { color: var(--navy); border: 1.5px solid var(--navy); padding: 7px 16px; border-radius: 6px; white-space: nowrap; }
+  .top nav .login:hover { background: var(--navy); color: var(--white); }
+  @media (max-width: 720px) {
+    .top nav .hide-sm { display: none; }
+    .wordmark .tag { display: none; }
+    .top nav .login { padding: 6px 12px; font-size: 0.92rem; }
   }
-  .top .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 72px;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none;
-    font-weight: 750; font-stretch: 112%; font-size: 1.2rem; letter-spacing: 0.01em;
-  }
-  .brand svg { width: 30px; height: 30px; }
-  .top nav { display: flex; gap: 28px; align-items: center; font-size: 0.95rem; }
-  .top nav a { text-decoration: none; color: var(--mist); }
-  .top nav a:hover { color: var(--white); }
-  .top nav .login {
-    color: var(--white); border: 1px solid var(--steel);
-    padding: 7px 16px; border-radius: 6px;
-  }
-  .top nav .login:hover { background: var(--navy-2); }
-  @media (max-width: 720px) { .top nav .hide-sm { display: none; } }
 
   /* Abertura */
-  .hero {
-    background: var(--navy);
-    color: var(--white);
-    padding: 56px 0 0;
-    overflow: hidden;
-  }
+  .hero { background: var(--paper); padding: 72px 0 0; overflow: hidden; }
   .hero h1 {
-    font-stretch: 118%;
-    font-weight: 780;
-    font-size: clamp(2.3rem, 5.6vw, 4.4rem);
-    line-height: 1.02;
-    letter-spacing: -0.015em;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5.2vw, 4.1rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
     margin: 0 0 24px;
-    max-width: 15ch;
+    max-width: 16ch;
+    color: var(--navy);
   }
-  .hero p.lead {
-    font-size: clamp(1.08rem, 1.6vw, 1.25rem);
-    color: var(--mist);
-    max-width: 52ch;
-    margin: 0 0 36px;
-  }
+  .hero p.lead { font-size: clamp(1.12rem, 1.6vw, 1.3rem); color: var(--ink-soft); max-width: 54ch; margin: 0 0 36px; }
   .actions { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn {
     display: inline-block; text-decoration: none;
-    font-weight: 650; font-size: 1rem;
+    font-weight: 700; font-size: 0.98rem;
     padding: 14px 24px; border-radius: 8px;
     transition: background-color .15s ease, color .15s ease;
   }
-  .btn-primary { background: var(--amber); color: var(--navy); }
-  .btn-primary:hover { background: #EDB977; }
-  .btn-ghost { color: var(--white); box-shadow: inset 0 0 0 1px var(--steel); }
-  .btn-ghost:hover { background: var(--navy-2); }
+  .btn-primary { background: var(--gold); color: var(--white); }
+  .btn-primary:hover { background: var(--gold-hover); }
+  .btn-ghost { color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--navy); }
+  .btn-ghost:hover { background: var(--navy); color: var(--white); }
 
   /* Gráfico do fluxo de caixa */
-  .chart {
-    margin-top: 64px;
-    position: relative;
-  }
+  .chart { margin: 64px 0 0; }
   .chart svg { display: block; width: 100%; height: auto; aspect-ratio: 1072 / 260; }
   @media (max-width: 720px) { .chart { margin-top: 44px; } .chart svg { aspect-ratio: auto; height: 170px; } }
   .chart figcaption {
     display: flex; flex-wrap: wrap; gap: 8px 28px;
-    font-size: 0.85rem; color: var(--mist);
-    padding: 18px 0 28px;
-    border-top: 1px solid var(--navy-2);
+    font-size: 0.92rem; color: var(--ink-soft);
+    padding: 18px 0 32px;
   }
   .key { display: inline-flex; align-items: center; gap: 8px; }
   .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
-  .swatch.neg { background: var(--amber); }
-  .swatch.pos { background: var(--mist); }
-  .swatch.cum { height: 3px; width: 18px; background: var(--white); border-radius: 2px; }
+  .swatch.neg { background: var(--navy); }
+  .swatch.pos { background: var(--gold); }
+  .swatch.cum { height: 3px; width: 18px; background: var(--steel); border-radius: 2px; }
   #cum-line { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.8s .3s ease-out forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
   @media (prefers-reduced-motion: reduce) {
@@ -127,31 +109,23 @@
   }
 
   /* Seções */
-  section.block { padding: 96px 0; }
-  section.block + section.block { border-top: 1px solid var(--line); }
+  section.block { padding: 96px 0; background: var(--white); }
+  section.block:nth-of-type(odd) { background: var(--paper); }
+  section.block { border-top: 1px solid var(--line); }
   h2 {
-    font-stretch: 112%;
-    font-weight: 740;
-    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
     margin: 0 0 16px;
-    max-width: 24ch;
+    max-width: 26ch;
+    color: var(--navy);
   }
   .intro { color: var(--ink-soft); max-width: 60ch; margin: 0 0 48px; }
 
   /* Setores */
-  .sectors {
-    display: flex; flex-wrap: wrap; gap: 10px;
-    list-style: none; padding: 0; margin: 0;
-  }
-  .sectors li {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 9px 18px;
-    font-weight: 560;
-  }
+  .sectors { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .sectors li { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; font-weight: 600; }
 
   /* Fluxo do modelo (sequência real: premissas até resultado) */
   .flow {
@@ -160,58 +134,40 @@
     counter-reset: etapa;
     border-top: 3px solid var(--navy);
   }
-  .flow li {
-    counter-increment: etapa;
-    padding: 22px 22px 8px 0;
-    position: relative;
-  }
+  .flow li { counter-increment: etapa; padding: 22px 22px 8px 0; }
   .flow li::before {
     content: counter(etapa);
     display: block;
-    font-weight: 800; font-stretch: 125%;
-    font-size: 2.6rem; line-height: 1;
-    color: var(--steel);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800; font-size: 2.4rem; line-height: 1;
+    color: var(--gold);
     margin-bottom: 14px;
   }
-  .flow h3 { font-size: 1.12rem; font-weight: 700; margin: 0 0 8px; }
-  .flow p { margin: 0; font-size: 0.97rem; color: var(--ink-soft); }
+  .flow h3 { font-size: 1.02rem; font-weight: 700; margin: 0 0 8px; color: var(--navy); }
+  .flow p { margin: 0; font-size: 1rem; color: var(--ink-soft); }
   @media (max-width: 900px) {
     .flow { grid-template-columns: 1fr; border-top: 0; }
-    .flow li {
-      display: grid; grid-template-columns: 56px 1fr; column-gap: 12px;
-      padding: 20px 0; border-top: 1px solid var(--line);
-    }
-    .flow li::before { grid-row: span 2; font-size: 2rem; margin: 0; }
+    .flow li { display: grid; grid-template-columns: 52px 1fr; column-gap: 12px; padding: 20px 0; border-top: 1px solid var(--line); }
+    .flow li::before { grid-row: span 2; font-size: 1.9rem; margin: 0; }
   }
 
   /* Princípios */
-  .principles {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 40px 64px;
-  }
-  .principles h3 { font-size: 1.15rem; font-weight: 700; margin: 0 0 8px; }
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 64px; }
+  .principles h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 8px; color: var(--navy); }
   .principles p { margin: 0; color: var(--ink-soft); max-width: 48ch; }
   @media (max-width: 760px) { .principles { grid-template-columns: 1fr; gap: 32px; } }
 
   /* Contato */
-  .contact {
-    background: var(--navy-2);
-    color: var(--white);
-    padding: 88px 0;
-  }
+  .contact { background: var(--navy); color: var(--white); padding: 88px 0; }
   .contact h2 { color: var(--white); }
   .contact .intro { color: var(--mist); }
-  .contact .mail { color: var(--mist); font-size: 0.95rem; margin-top: 22px; }
+  .contact .btn-ghost { color: var(--white); box-shadow: inset 0 0 0 1.5px var(--mist); }
+  .contact .btn-ghost:hover { background: var(--navy-2); }
+  .contact .mail { color: var(--mist); font-size: 1rem; margin-top: 22px; }
   .contact .mail a { color: var(--white); }
 
-  footer {
-    background: var(--navy);
-    color: var(--mist);
-    font-size: 0.88rem;
-    padding: 28px 0;
-  }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
-  footer a { color: var(--mist); }
+  footer { background: var(--navy); border-top: 1px solid var(--navy-2); color: var(--mist); font-size: 0.92rem; padding: 26px 0; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 </style>
 </head>
 <body>
@@ -219,8 +175,8 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Valora PPP, página inicial">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#123A63"/><path d="M8 9l8 15 8-15" fill="none" stroke="#C9D6E5" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Valora PPP
+      <svg class="mark" viewBox="0 0 104 70" aria-hidden="true"><g fill="#0B1F3B"><rect x="0" y="0" width="12" height="46"/><rect x="18" y="10" width="12" height="46"/><rect x="36" y="20" width="12" height="46"/></g><g fill="#C9962E"><polygon points="55,42 67,35 67,63 55,70"/><polygon points="73,25 85,18 85,55 73,62"/><polygon points="91,7 103,1 103,46 91,53"/></g></svg>
+      <span class="wordmark"><span class="name">Valora PPP</span><span class="tag">Modelagem econômico-financeira</span></span>
     </a>
     <nav aria-label="Principal">
       <a class="hide-sm" href="#modelo">O modelo</a>
@@ -339,7 +295,7 @@
 <footer>
   <div class="wrap">
     <span>© <span id="ano">2026</span> Valora PPP</span>
-    <span>Modelagem econômico-financeira de concessões e PPPs</span>
+    <span>Desenvolvimento: Dalmo Silveira | Economista | Corecon/SP 33884</span>
   </div>
 </footer>
 
@@ -372,7 +328,7 @@
     var base = document.createElementNS(NS, 'line');
     base.setAttribute('x1', 0); base.setAttribute('x2', W);
     base.setAttribute('y1', y0); base.setAttribute('y2', y0);
-    base.setAttribute('stroke', '#2F5D8C'); base.setAttribute('stroke-width', 1);
+    base.setAttribute('stroke', '#9FB3C9'); base.setAttribute('stroke-width', 1);
     svg.appendChild(base);
 
     fluxo.forEach(function (v, i) {
@@ -384,7 +340,7 @@
       r.setAttribute('width', bw.toFixed(1));
       r.setAttribute('height', Math.abs(yv - y0).toFixed(1));
       r.setAttribute('rx', 2);
-      r.setAttribute('fill', v < 0 ? '#E3A55A' : '#C9D6E5');
+      r.setAttribute('fill', v < 0 ? '#0B1F3B' : '#C9962E');
       svg.appendChild(r);
     });
 
@@ -395,7 +351,7 @@
     p.setAttribute('id', 'cum-line');
     p.setAttribute('d', d);
     p.setAttribute('fill', 'none');
-    p.setAttribute('stroke', '#FFFFFF');
+    p.setAttribute('stroke', '#2F5D8C');
     p.setAttribute('stroke-width', 2.5);
     p.setAttribute('stroke-linejoin', 'round');
     p.setAttribute('vector-effect', 'non-scaling-stroke');
