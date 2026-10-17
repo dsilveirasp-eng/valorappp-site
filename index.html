@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valora PPP | Modelagem econômico-financeira de concessões</title>
+<meta name="description" content="Valora PPP: sistema de modelagem econômico-financeira para concessões e parcerias público-privadas. Custo de capital, projeções, demonstrações, outorga, TIR, VPL e relatório técnico.">
+<meta property="og:title" content="Valora PPP">
+<meta property="og:description" content="Modelagem econômico-financeira de concessões e PPPs, do WACC à TIR do projeto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.valorappp.com.br/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B1F3B'/%3E%3Cpath d='M8 9l8 15 8-15' fill='none' stroke='%23C9D6E5' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3B;
+    --navy-2: #123A63;
+    --steel: #2F5D8C;
+    --mist: #C9D6E5;
+    --paper: #F2F5F8;
+    --white: #FFFFFF;
+    --amber: #E3A55A;
+    --ink: #0B1F3B;
+    --ink-soft: #3D5270;
+    --line: #D5DFEA;
+    --max: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* Cabeçalho */
+  .top {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .top .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    font-weight: 750; font-stretch: 112%; font-size: 1.2rem; letter-spacing: 0.01em;
+  }
+  .brand svg { width: 30px; height: 30px; }
+  .top nav { display: flex; gap: 28px; align-items: center; font-size: 0.95rem; }
+  .top nav a { text-decoration: none; color: var(--mist); }
+  .top nav a:hover { color: var(--white); }
+  .top nav .login {
+    color: var(--white); border: 1px solid var(--steel);
+    padding: 7px 16px; border-radius: 6px;
+  }
+  .top nav .login:hover { background: var(--navy-2); }
+  @media (max-width: 720px) { .top nav .hide-sm { display: none; } }
+
+  /* Abertura */
+  .hero {
+    background: var(--navy);
+    color: var(--white);
+    padding: 56px 0 0;
+    overflow: hidden;
+  }
+  .hero h1 {
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.3rem, 5.6vw, 4.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0 0 24px;
+    max-width: 15ch;
+  }
+  .hero p.lead {
+    font-size: clamp(1.08rem, 1.6vw, 1.25rem);
+    color: var(--mist);
+    max-width: 52ch;
+    margin: 0 0 36px;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; text-decoration: none;
+    font-weight: 650; font-size: 1rem;
+    padding: 14px 24px; border-radius: 8px;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .btn-primary { background: var(--amber); color: var(--navy); }
+  .btn-primary:hover { background: #EDB977; }
+  .btn-ghost { color: var(--white); box-shadow: inset 0 0 0 1px var(--steel); }
+  .btn-ghost:hover { background: var(--navy-2); }
+
+  /* Gráfico do fluxo de caixa */
+  .chart {
+    margin-top: 64px;
+    position: relative;
+  }
+  .chart svg { display: block; width: 100%; height: auto; aspect-ratio: 1072 / 260; }
+  @media (max-width: 720px) { .chart { margin-top: 44px; } .chart svg { aspect-ratio: auto; height: 170px; } }
+  .chart figcaption {
+    display: flex; flex-wrap: wrap; gap: 8px 28px;
+    font-size: 0.85rem; color: var(--mist);
+    padding: 18px 0 28px;
+    border-top: 1px solid var(--navy-2);
+  }
+  .key { display: inline-flex; align-items: center; gap: 8px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .swatch.neg { background: var(--amber); }
+  .swatch.pos { background: var(--mist); }
+  .swatch.cum { height: 3px; width: 18px; background: var(--white); border-radius: 2px; }
+  #cum-line { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.8s .3s ease-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    #cum-line { animation: none; stroke-dashoffset: 0; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Seções */
+  section.block { padding: 96px 0; }
+  section.block + section.block { border-top: 1px solid var(--line); }
+  h2 {
+    font-stretch: 112%;
+    font-weight: 740;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    max-width: 24ch;
+  }
+  .intro { color: var(--ink-soft); max-width: 60ch; margin: 0 0 48px; }
+
+  /* Setores */
+  .sectors {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    list-style: none; padding: 0; margin: 0;
+  }
+  .sectors li {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-weight: 560;
+  }
+
+  /* Fluxo do modelo (sequência real: premissas até resultado) */
+  .flow {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    counter-reset: etapa;
+    border-top: 3px solid var(--navy);
+  }
+  .flow li {
+    counter-increment: etapa;
+    padding: 22px 22px 8px 0;
+    position: relative;
+  }
+  .flow li::before {
+    content: counter(etapa);
+    display: block;
+    font-weight: 800; font-stretch: 125%;
+    font-size: 2.6rem; line-height: 1;
+    color: var(--steel);
+    margin-bottom: 14px;
+  }
+  .flow h3 { font-size: 1.12rem; font-weight: 700; margin: 0 0 8px; }
+  .flow p { margin: 0; font-size: 0.97rem; color: var(--ink-soft); }
+  @media (max-width: 900px) {
+    .flow { grid-template-columns: 1fr; border-top: 0; }
+    .flow li {
+      display: grid; grid-template-columns: 56px 1fr; column-gap: 12px;
+      padding: 20px 0; border-top: 1px solid var(--line);
+    }
+    .flow li::before { grid-row: span 2; font-size: 2rem; margin: 0; }
+  }
+
+  /* Princípios */
+  .principles {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 40px 64px;
+  }
+  .principles h3 { font-size: 1.15rem; font-weight: 700; margin: 0 0 8px; }
+  .principles p { margin: 0; color: var(--ink-soft); max-width: 48ch; }
+  @media (max-width: 760px) { .principles { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Contato */
+  .contact {
+    background: var(--navy-2);
+    color: var(--white);
+    padding: 88px 0;
+  }
+  .contact h2 { color: var(--white); }
+  .contact .intro { color: var(--mist); }
+  .contact .mail { color: var(--mist); font-size: 0.95rem; margin-top: 22px; }
+  .contact .mail a { color: var(--white); }
+
+  footer {
+    background: var(--navy);
+    color: var(--mist);
+    font-size: 0.88rem;
+    padding: 28px 0;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  footer a { color: var(--mist); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Valora PPP, página inicial">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#123A63"/><path d="M8 9l8 15 8-15" fill="none" stroke="#C9D6E5" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Valora PPP
+    </a>
+    <nav aria-label="Principal">
+      <a class="hide-sm" href="#modelo">O modelo</a>
+      <a class="hide-sm" href="#contato">Contato</a>
+      <a class="login" href="https://app.valorappp.com.br">Acessar o sistema</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Modelagem econômico-financeira de concessões e PPPs</h1>
+      <p class="lead">Do custo de capital à TIR do projeto num só modelo: premissas, projeções, demonstrações, outorga e relatório técnico, com cada número rastreável até a sua origem.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:contato@valorappp.com.br?subject=Demonstra%C3%A7%C3%A3o%20do%20Valora%20PPP">Solicitar demonstração</a>
+        <a class="btn btn-ghost" href="https://app.valorappp.com.br">Acessar o sistema</a>
+      </div>
+
+      <figure class="chart" aria-label="Exemplo ilustrativo de fluxo de caixa de um projeto de concessão: investimentos negativos nos primeiros anos, fluxos positivos depois e o saldo acumulado cruzando o zero.">
+        <svg id="cf" viewBox="0 0 1072 260" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <figcaption>
+          <span class="key"><span class="swatch neg"></span>Investimento</span>
+          <span class="key"><span class="swatch pos"></span>Fluxo de caixa livre</span>
+          <span class="key"><span class="swatch cum"></span>Saldo acumulado</span>
+          <span>Perfil ilustrativo de uma concessão ao longo do prazo</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="setores">
+    <div class="wrap">
+      <h2>Para qualquer concessão, de ferrovias à iluminação pública</h2>
+      <p class="intro">O Valora PPP não é amarrado a um setor. Receitas, custos, investimentos e tributos são premissas do projeto, então o mesmo modelo atende a infraestruturas muito diferentes.</p>
+      <ul class="sectors">
+        <li>Ferrovias</li>
+        <li>Rodovias</li>
+        <li>Mobilidade urbana</li>
+        <li>Saneamento</li>
+        <li>Resíduos sólidos</li>
+        <li>Iluminação pública</li>
+        <li>Portos e aeroportos</li>
+        <li>Equipamentos públicos</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="modelo">
+    <div class="wrap">
+      <h2>Como o modelo é construído</h2>
+      <p class="intro">Cada etapa alimenta a seguinte. Você informa as premissas e o sistema monta as demonstrações e os indicadores de viabilidade.</p>
+      <ol class="flow">
+        <li>
+          <h3>Custo de capital</h3>
+          <p>Ke pelo CAPM, beta setorial de Damodaran, custo da dívida e WACC.</p>
+        </li>
+        <li>
+          <h3>Projeções</h3>
+          <p>Receitas por linha com seus tributos, Opex, Capex, depreciação, inflação e capital de giro.</p>
+        </li>
+        <li>
+          <h3>Financiamento e outorga</h3>
+          <p>Dívida, outorga fixa e variável e outorga de equilíbrio pela TIR-alvo.</p>
+        </li>
+        <li>
+          <h3>Demonstrações</h3>
+          <p>DRE, fluxo de caixa livre, fluxo do acionista, DFC e balanço.</p>
+        </li>
+        <li>
+          <h3>Resultado</h3>
+          <p>TIR, VPL e relatório técnico em PDF, com exportação para Excel.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="principios">
+    <div class="wrap">
+      <h2>Feito para ser auditado</h2>
+      <p class="intro">Um estudo de viabilidade é lido por quem precisa conferir. O Valora segue a boa prática de modelagem, não os atalhos das planilhas.</p>
+      <div class="principles">
+        <div>
+          <h3>Modelo em valores reais</h3>
+          <p>Premissas reais do início ao fim, com o efeito da inflação tratado onde ele de fato existe: depreciação, créditos tributários e capital de giro.</p>
+        </div>
+        <div>
+          <h3>Tributação brasileira no lucro real</h3>
+          <p>IR e CSLL calculados numa base única, com tributos sobre a receita definidos por linha de atividade.</p>
+        </div>
+        <div>
+          <h3>Contas que fecham</h3>
+          <p>As identidades do modelo são conferidas: fluxo do acionista igual ao fluxo livre mais o da dívida, DRE coerente com o caixa, balanço equilibrado.</p>
+        </div>
+        <div>
+          <h3>Relatório que embasa a decisão</h3>
+          <p>Premissas, demonstrações, gráficos e indicadores reunidos num documento técnico pronto para análise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="wrap">
+      <h2>Quer ver o Valora aplicado ao seu projeto?</h2>
+      <p class="intro">O acesso é liberado individualmente. Conte qual concessão você está estudando e agendamos uma demonstração.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:contato@valorappp.com.br?subject=Solicita%C3%A7%C3%A3o%20de%20acesso%20ao%20Valora%20PPP">Solicitar acesso</a>
+        <a class="btn btn-ghost" href="https://app.valorappp.com.br">Já tenho login</a>
+      </div>
+      <p class="mail">Ou escreva para <a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="ano">2026</span> Valora PPP</span>
+    <span>Modelagem econômico-financeira de concessões e PPPs</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var y = document.getElementById('ano');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Perfil ilustrativo de fluxo de caixa (não representa nenhum projeto real)
+    var fluxo = [-60, -45, -25, -5, 6, 9, 11, 12, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 17, 17, 17, 16, 16, 15, 22];
+    var svg = document.getElementById('cf');
+    if (!svg) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var W = 1072, H = 260, padT = 16, padB = 16;
+    var acum = [], s = 0;
+    fluxo.forEach(function (v) { s += v; acum.push(s); });
+    // Barras e saldo acumulado em escalas próprias, com o mesmo eixo zero (gráfico ilustrativo, sem valores)
+    var y0 = H * 0.56;
+    var up = y0 - padT, down = H - padB - y0;
+    var fit = function (arr) {
+      var pos = Math.max.apply(null, arr.concat([0.0001]));
+      var neg = -Math.min.apply(null, arr.concat([-0.0001]));
+      return Math.min(up / pos, down / neg);
+    };
+    var kBar = fit(fluxo) * 0.92, kCum = fit(acum);
+    var yBar = function (v) { return y0 - v * kBar; };
+    var yScale = function (v) { return y0 - v * kCum; };
+    var n = fluxo.length, step = W / n, bw = step * 0.56;
+
+    var base = document.createElementNS(NS, 'line');
+    base.setAttribute('x1', 0); base.setAttribute('x2', W);
+    base.setAttribute('y1', y0); base.setAttribute('y2', y0);
+    base.setAttribute('stroke', '#2F5D8C'); base.setAttribute('stroke-width', 1);
+    svg.appendChild(base);
+
+    fluxo.forEach(function (v, i) {
+      var r = document.createElementNS(NS, 'rect');
+      var x = i * step + (step - bw) / 2;
+      var yv = yBar(v);
+      r.setAttribute('x', x.toFixed(1));
+      r.setAttribute('y', Math.min(yv, y0).toFixed(1));
+      r.setAttribute('width', bw.toFixed(1));
+      r.setAttribute('height', Math.abs(yv - y0).toFixed(1));
+      r.setAttribute('rx', 2);
+      r.setAttribute('fill', v < 0 ? '#E3A55A' : '#C9D6E5');
+      svg.appendChild(r);
+    });
+
+    var d = acum.map(function (v, i) {
+      return (i ? 'L' : 'M') + (i * step + step / 2).toFixed(1) + ' ' + yScale(v).toFixed(1);
+    }).join(' ');
+    var p = document.createElementNS(NS, 'path');
+    p.setAttribute('id', 'cum-line');
+    p.setAttribute('d', d);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', '#FFFFFF');
+    p.setAttribute('stroke-width', 2.5);
+    p.setAttribute('stroke-linejoin', 'round');
+    p.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(p);
+    p.style.setProperty('--len', Math.ceil(p.getTotalLength()));
+  })();
+</script>
+</body>
+</html>
