@@ -173,7 +173,23 @@
   .sec .intro { color: var(--ink-soft); max-width: 62ch; margin: 0 0 44px; }
 
   /* Concessões fatiadas */
-  #concessoes { padding-top: 40px; }
+  #concessoes { padding-top: 88px; border-top: 1px solid var(--line); }
+
+  /* Propósito */
+  #proposito { padding-top: 40px; }
+  .purpose-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: start; margin-bottom: 48px; }
+  .purpose-head h2 { margin: 0; max-width: 16ch; }
+  .purpose-head p { margin: 4px 0 0; color: var(--ink-soft); font-size: 1.125rem; line-height: 1.65; max-width: 66ch; }
+  .pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .pillar { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px 28px; }
+  .pillar .ico { width: 46px; height: 46px; border-radius: 12px; background: var(--navy); display: grid; place-items: center; margin-bottom: 18px; }
+  .pillar .ico svg { width: 24px; height: 24px; }
+  .pillar h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+  .pillar p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+  .purpose-close { margin: 44px 0 0; padding: 4px 0 4px 22px; border-left: 4px solid var(--gold); font-family: "Montserrat", sans-serif; font-weight: 700; font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.4; color: var(--navy); max-width: 46ch; }
+  @media (max-width: 1080px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) { .purpose-head { grid-template-columns: 1fr; gap: 16px; } }
+  @media (max-width: 600px) { .pillars { grid-template-columns: 1fr; } }
   .slices { display: flex; gap: 10px; height: 400px; }
   .slice {
     position: relative; flex: 1 1 0; min-width: 0;
@@ -392,6 +408,7 @@
       <span class="wordmark"><span class="name">Valora PPP</span><span class="tag">Modelagem econômico-financeira</span></span>
     </a>
     <nav aria-label="Principal">
+      <a class="hide-sm" href="#proposito">Propósito</a>
       <a class="hide-sm" href="#concessoes">Concessões</a>
       <a class="hide-sm" href="#origem">A origem</a>
       <a class="hide-sm" href="#modelo">O modelo</a>
@@ -418,6 +435,22 @@
       </div>
     </div>
     <svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="cg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2F5D8C"/><stop offset=".5" stop-color="#5E86AE"/><stop offset="1" stop-color="#C9962E"/></linearGradient></defs><path d="M0 100 V64 Q720 -16 1440 64 V100 Z" fill="#F2F5F8"/><path d="M0 64 Q720 -16 1440 64" fill="none" stroke="url(#cg1)" stroke-width="6" vector-effect="non-scaling-stroke"/></svg>
+  </section>
+
+  <section class="sec" id="proposito">
+    <div class="wrap">
+      <div class="purpose-head">
+        <h2>Modelagem de alto nível não deveria ser privilégio</h2>
+        <p>Estruturar uma concessão exige estudos de viabilidade sólidos, mas o ferramental técnico para modelagens robustas costuma ficar restrito a poucos centros de decisão e grandes consultorias. Quando a análise econômica e financeira de longo prazo se torna uma barreira em vez de um instrumento acessível, projetos viáveis deixam de sair do papel ou avançam sem a clareza necessária. O Valora PPP nasceu para mudar isso, democratizando a modelagem de infraestrutura com rigor analítico.</p>
+      </div>
+      <ul class="pillars">
+        <li class="pillar"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12" stroke="#C9D6E5"/><path d="M10 21v-6h4v6" stroke="#C9962E"/></svg></span><h3>Acesso para todos</h3><p>Modelagem econômico-financeira de padrão técnico elevado ao alcance de municípios e órgãos públicos de qualquer porte, sem depender de grandes contratações.</p></li>
+        <li class="pillar"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z" stroke="#C9962E"/><path d="M3 13l9 5 9-5M3 17.5l9 5 9-5" stroke="#C9D6E5"/></svg></span><h3>Replicável e escalável</h3><p>Um método único e consistente, que pode ser aplicado a projetos diferentes com o mesmo rigor e permite comparar resultados.</p></li>
+        <li class="pillar"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.5" stroke="#C9D6E5"/><circle cx="18" cy="7" r="2.5" stroke="#C9D6E5"/><circle cx="12" cy="18" r="2.5" stroke="#C9962E"/><path d="M8.3 8.2l2.4 7.6M15.7 8.2l-2.4 7.6M8.5 7h7" stroke="#C9D6E5"/></svg></span><h3>Conhecimento compartilhado</h3><p>Um ambiente colaborativo, em que boas práticas de modelagem se acumulam e circulam, em vez de ficar presas em planilhas isoladas.</p></li>
+        <li class="pillar"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6" stroke="#C9D6E5"/><path d="M15 15l5.5 5.5" stroke="#C9D6E5"/><path d="M7.8 10.6l1.9 1.9 3.6-3.8" stroke="#C9962E"/></svg></span><h3>De quem modela a quem fiscaliza</h3><p>A mesma ferramenta serve às equipes que estruturam projetos e às equipes de tribunais de contas e órgãos de controle que precisam analisá-los, com premissas transparentes e números rastreáveis.</p></li>
+      </ul>
+      <p class="purpose-close">Nosso objetivo é tornar a boa modelagem um bem público: transparente, replicável e acessível.</p>
+    </div>
   </section>
 
   <section class="sec" id="concessoes">
@@ -595,7 +628,7 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
+      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
     </div>
