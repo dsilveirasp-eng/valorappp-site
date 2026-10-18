@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valora PPP | Modelagem econômico-financeira de concessões</title>
+<meta name="description" content="Valora PPP: sistema de modelagem econômico-financeira para concessões e parcerias público-privadas. Custo de capital, projeções, demonstrações, outorga, TIR, VPL e relatório técnico.">
+<meta property="og:title" content="Valora PPP">
+<meta property="og:description" content="Modelagem econômico-financeira de concessões e PPPs, do WACC à TIR do projeto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.valorappp.com.br/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -20 120 110'%3E%3Crect x='-8' y='-20' width='120' height='110' rx='16' fill='%230B1F3B'/%3E%3Cg fill='%23F2F5F8'%3E%3Crect x='0' y='0' width='12' height='46'/%3E%3Crect x='18' y='10' width='12' height='46'/%3E%3Crect x='36' y='20' width='12' height='46'/%3E%3C/g%3E%3Cg fill='%23C9962E'%3E%3Cpolygon points='55,42 67,35 67,63 55,70'/%3E%3Cpolygon points='73,25 85,18 85,55 73,62'/%3E%3Cpolygon points='91,7 103,1 103,46 91,53'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3B;
+    --navy-2: #123A63;
+    --navy-3: #16304F;
+    --steel: #2F5D8C;
+    --mist: #C9D6E5;
+    --paper: #F2F5F8;
+    --white: #FFFFFF;
+    --gold: #C9962E;
+    --gold-soft: #E2B95A;
+    --ink: #0B1F3B;
+    --ink-soft: #46597A;
+    --line: #D5DFEA;
+    --max: 1760px;
+    --head: 84px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+  }
+  h1, h2, h3, .name, .btn { font-family: "Montserrat", system-ui, sans-serif; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(24px, 5vw, 96px); }
+
+  /* Textura de linhas finas (fundos escuros) */
+  .texture { position: relative; isolation: isolate; }
+  .texture::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(201,214,229,.045) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(25deg, rgba(201,214,229,.03) 0 1px, transparent 1px 22px);
+    -webkit-mask-image: radial-gradient(120% 90% at 90% 20%, #000 20%, transparent 75%);
+            mask-image: radial-gradient(120% 90% at 90% 20%, #000 20%, transparent 75%);
+  }
+
+  /* Cabeçalho fixo */
+  .top {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--navy); color: var(--white);
+    transition: background-color .25s ease, box-shadow .25s ease;
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--head); gap: 16px; transition: height .25s ease; }
+  .top.scrolled { background: rgba(11,31,59,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(201,214,229,.12), 0 10px 30px -12px rgba(3,10,22,.6); }
+  .top.scrolled .wrap { height: 64px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand .mark { width: 42px; height: auto; flex: none; transition: width .25s ease; }
+  .top.scrolled .brand .mark { width: 34px; }
+  .wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+  .wordmark .name { white-space: nowrap; font-weight: 800; font-size: 1.35rem; color: var(--white); letter-spacing: -0.01em; }
+  .wordmark .tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); margin-top: 3px; }
+  .top nav { display: flex; gap: 28px; align-items: center; font-size: 1rem; }
+  .top nav a { text-decoration: none; color: var(--mist); font-weight: 600; }
+  .top nav a:hover { color: var(--white); }
+  .top nav .login { color: var(--navy); background: var(--gold); padding: 8px 18px; border-radius: 999px; white-space: nowrap; }
+  .top nav .login:hover { background: var(--gold-soft); color: var(--navy); }
+  @media (max-width: 820px) {
+    .top nav .hide-sm { display: none; }
+    .wordmark .tag { display: none; }
+    .top nav .login { padding: 7px 14px; font-size: 0.92rem; }
+  }
+
+  /* Botões */
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; text-decoration: none;
+    font-weight: 700; font-size: 0.98rem;
+    padding: 14px 26px; border-radius: 999px;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .btn-primary { background: var(--gold); color: var(--navy); }
+  .btn-primary:hover { background: var(--gold-soft); }
+  .btn-ghost { color: var(--white); box-shadow: inset 0 0 0 1.5px rgba(201,214,229,.55); }
+  .btn-ghost:hover { background: var(--navy-2); }
+  .btn-dark { background: var(--navy); color: var(--white); }
+  .btn-dark:hover { background: var(--navy-2); }
+  .btn-outline { color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--navy); }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+  /* Abertura */
+  .hero {
+    color: var(--white);
+    background:
+      radial-gradient(900px 520px at 85% 30%, rgba(47,93,140,.45), transparent 70%),
+      radial-gradient(700px 400px at 20% 115%, rgba(201,150,46,.12), transparent 70%),
+      var(--navy);
+    padding: 64px 0 0;
+  }
+  .hero h1 {
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4.1vw, 3.9rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+  }
+  .hero h1 span { display: block; }
+  .hero h1 .l2 { color: var(--mist); font-weight: 700; }
+  @media (min-width: 900px) { .hero h1 span { white-space: nowrap; } }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
+  .hero-head { width: fit-content; max-width: 100%; }
+  .hero p.lead {
+    width: 0; min-width: 100%;
+    font-size: clamp(1.12rem, 1.89vw, 1.8rem); line-height: 1.55;
+    color: var(--mist); margin: 0 0 36px;
+    text-align: justify; text-align-last: left; hyphens: none;
+  }
+  @media (max-width: 899px) { .hero-head { width: auto; } .hero p.lead { width: auto; text-align: left; } }
+  .hero-grid .actions { margin-top: 8px; }
+  .trust { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 0.95rem; color: var(--mist); padding: 0; list-style: none; }
+  .trust li { display: inline-flex; align-items: center; gap: 8px; }
+  .trust svg { width: 16px; height: 16px; flex: none; }
+  .hero { position: relative; }
+  .hero > .wrap { position: relative; z-index: 1; padding-bottom: clamp(190px, 21vw, 330px); }
+  @media (max-width: 899px) { .hero > .wrap { padding-bottom: 240px; } }
+  .hero-grid { grid-template-columns: 1fr; }
+  .art { position: absolute; left: 0; right: 0; top: 0; bottom: clamp(30px, 4vw, 60px); z-index: 0; pointer-events: none; }
+  .art svg {
+    display: block; width: 100%; height: 100%; overflow: visible;
+    -webkit-mask-image: radial-gradient(52% 46% at 28% 34%, rgba(0,0,0,.12), #000 80%);
+            mask-image: radial-gradient(52% 46% at 28% 34%, rgba(0,0,0,.12), #000 80%);
+  }
+  .art .fan path { opacity: 0; animation: fade 1.2s ease-out forwards; }
+  #lead-path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 2.4s .5s cubic-bezier(.4,0,.2,1) forwards; }
+  #lead-end { opacity: 0; animation: fade .6s 2.7s ease-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: var(--o, 1); } }
+  @media (max-width: 960px) {
+    .art svg { -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.15) 35%, #000 70%); mask-image: linear-gradient(to bottom, rgba(0,0,0,.15) 35%, #000 70%); }
+  }
+
+  /* Borda curva com filete em degradê */
+  .curve { display: block; width: 100%; height: clamp(48px, 7vw, 96px); margin-top: -10px; }
+  .curve.flip { transform: scaleY(-1); margin: 0 0 -1px; }
+
+  /* Títulos de seção */
+  .sec { padding: 88px 0; }
+  .sec h2 {
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    max-width: 28ch;
+    color: var(--navy);
+  }
+  .sec .intro { color: var(--ink-soft); max-width: 62ch; margin: 0 0 44px; }
+
+  /* Concessões fatiadas */
+  #concessoes { padding-top: 40px; }
+  .slices { display: flex; gap: 10px; height: 400px; }
+  .slice {
+    position: relative; flex: 1 1 0; min-width: 0;
+    border-radius: 16px; overflow: hidden;
+    background: linear-gradient(180deg, var(--navy-3) 0%, var(--navy) 100%);
+    color: var(--white);
+    transition: flex-grow .45s cubic-bezier(.4,0,.2,1);
+  }
+  .slice::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(80% 50% at 50% 0%, rgba(47,93,140,.45), transparent 70%);
+  }
+  .slice.photo {
+    background-image: linear-gradient(180deg, rgba(11,31,59,.10) 0%, rgba(11,31,59,.35) 100%), var(--img);
+    background-size: cover; background-position: center;
+    transition: flex-grow .45s cubic-bezier(.4,0,.2,1), background-size .45s ease;
+  }
+  .slice.photo::after { display: none; }
+  .slice svg { position: absolute; left: 50%; top: 22px; width: clamp(210px, 92%, 300px); height: auto; transform: translateX(-50%); z-index: 1; }
+  .slice .lbl {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 14px 22px 18px;
+    background: rgba(11, 31, 59, 0.85);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    border-top: 1px solid rgba(201, 214, 229, 0.12);
+  }
+  .slice h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  .slice p { margin: 4px 0 0; font-size: 0.92rem; color: var(--mist); max-height: 0; opacity: 0; overflow: hidden; transition: max-height .4s ease, opacity .3s ease; }
+  .slice:hover, .slice:focus-within { flex-grow: 1.7; }
+  .slice:hover p, .slice:focus-within p { max-height: 80px; opacity: 1; }
+  .slices + .slices { margin-top: 10px; }
+  .also { margin: 22px 0 0; color: var(--ink-soft); font-size: 1rem; }
+  @media (max-width: 860px) {
+    .slices { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+    .slice { flex: 0 0 72%; height: 380px; scroll-snap-align: start; }
+    .slice:hover, .slice:focus-within { flex-grow: 0; }
+    .slice p { max-height: none; opacity: 1; }
+  }
+
+  /* Cartões de funcionalidades */
+  #modelo { background: var(--white); }
+  .cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; counter-reset: etapa; }
+  .card {
+    counter-increment: etapa;
+    background: var(--navy); color: var(--white);
+    border-radius: 16px; padding: 18px 18px 22px;
+    border: 1px solid rgba(201,214,229,.14);
+    display: flex; flex-direction: column;
+  }
+  .card .ui { background: var(--navy-3); border-radius: 10px; padding: 10px; margin-bottom: 18px; }
+  .card .ui svg { display: block; width: 100%; height: auto; }
+  .card h3 { font-size: 1.02rem; font-weight: 700; margin: 0 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  .card h3::before { content: counter(etapa); color: var(--gold); font-weight: 800; }
+  .card p { margin: 0; font-size: 0.98rem; color: var(--mist); }
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card { scroll-margin-top: 90px; transition: border-color .2s ease, box-shadow .2s ease; }
+  .card:target { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(201,150,46,.35); }
+  .sec h2.one-line { max-width: none; }
+  .fit-head { width: fit-content; max-width: 100%; }
+  .sec .intro.fit { width: 0; min-width: 100%; max-width: none; }
+  .sec .intro.one-line-p { max-width: none; }
+  @media (min-width: 1100px) { .sec .intro.one-line-p { white-space: nowrap; } }
+  @media (max-width: 1099px) { .fit-head { width: auto; } .sec .intro.fit { width: auto; text-align: left; } }
+  @media (min-width: 1100px) { .sec h2.one-line { white-space: nowrap; font-size: 1.95rem; } }
+  .flow-grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
+  .steps {
+    position: sticky; top: 88px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+    padding: 22px 20px 14px;
+  }
+  .steps-title { display: block; font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); margin: 0 0 14px; }
+  .steps ol { list-style: none; margin: 0; padding: 0; position: relative; }
+  .steps ol::before { content: ""; position: absolute; left: 15px; top: 18px; bottom: 18px; width: 2px; background: linear-gradient(#2F5D8C, #C9962E); }
+  .steps a {
+    position: relative; display: flex; align-items: center; gap: 14px;
+    padding: 9px 8px 9px 0; text-decoration: none; color: var(--navy); font-weight: 600; font-size: 1rem; line-height: 1.3;
+    border-radius: 8px;
+  }
+  .steps a b {
+    flex: none; width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--navy); color: var(--gold); font-family: "Montserrat", sans-serif; font-size: .9rem;
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .steps a:hover { color: var(--steel); }
+  .steps a:hover b { background: var(--gold); color: var(--navy); }
+  @media (max-width: 1080px) { .flow-grid { grid-template-columns: 1fr; } .steps { position: static; } .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+
+  /* Auditável: duas colunas sobre navy */
+  .audit { background: var(--navy); color: var(--white); padding: 0 0 80px; }
+  .audit h2 { color: var(--white); }
+  .audit .intro { color: var(--mist); }
+  .audit-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+  .principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .principles li { display: grid; grid-template-columns: 22px 1fr; gap: 14px; }
+  .principles li::before { content: ""; width: 10px; height: 10px; margin-top: 9px; border-radius: 3px; background: var(--gold); transform: rotate(45deg); }
+  .principles h3 { margin: 0 0 4px; font-size: 1.02rem; font-weight: 700; }
+  .principles p { margin: 0; color: var(--mist); font-size: 1rem; max-width: 50ch; }
+  .stack { position: relative; aspect-ratio: 5 / 4; }
+  .win {
+    position: absolute; background: var(--navy-3); border: 1px solid rgba(201,214,229,.18);
+    border-radius: 12px; box-shadow: 0 24px 50px -20px rgba(0,0,0,.6); overflow: hidden;
+  }
+  .win svg { display: block; width: 100%; height: auto; }
+  .win.w1 { left: 0; top: 6%; width: 64%; }
+  .win.w2 { right: 0; top: 0; width: 52%; }
+  .win.w3 { left: 18%; bottom: 0; width: 60%; }
+  .badge {
+    position: absolute; right: 4%; bottom: 14%;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #2F5D8C; color: var(--white); border-radius: 999px; padding: 8px 16px 8px 10px;
+    font-size: 0.92rem; font-weight: 600; box-shadow: 0 12px 30px -10px rgba(0,0,0,.6);
+  }
+  .badge i { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; }
+  .badge i svg { width: 12px; height: 12px; }
+  @media (max-width: 900px) { .audit-grid { grid-template-columns: 1fr; } }
+
+  /* Faixa de chamada */
+  .cta-sec { padding: 88px 0; }
+  .cta {
+    display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    border-radius: 18px; overflow: hidden; border: 1px solid var(--line);
+    background: var(--white);
+  }
+  .cta .dark { background: linear-gradient(120deg, var(--navy) 0%, var(--navy-2) 100%); color: var(--white); padding: 44px 96px 44px 44px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+  .cta .dark h2 { color: var(--white); margin: 0 0 10px; font-size: clamp(1.45rem, 2.3vw, 1.75rem); line-height: 1.2; }
+  @media (min-width: 1000px) { .cta .dark h2 { white-space: nowrap; } }
+  .cta .dark p { margin: 0; color: var(--mist); max-width: 52ch; font-size: 1.15rem; }
+  .cta .light { position: relative; padding: 40px 36px 40px 64px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .cta .light::before {
+    content: ""; position: absolute; left: -46px; top: -20%; width: 90px; height: 140%;
+    border-radius: 50%; background: var(--white);
+    box-shadow: -6px 0 0 0 #2F5D8C, -12px 0 0 0 rgba(201,150,46,.9);
+  }
+  .cta .light > * { position: relative; }
+  .cta .light .mail { font-size: 0.95rem; color: var(--ink-soft); }
+  .cta .light .mail a { color: var(--navy); font-weight: 600; }
+  @media (max-width: 820px) {
+    .cta { grid-template-columns: 1fr; }
+    .cta .dark { padding: 32px 26px; }
+    .cta .light { padding: 28px 26px; }
+    .cta .light::before { display: none; }
+  }
+
+  /* Rodapé */
+  footer { background: var(--navy); color: var(--mist); }
+  .rule { height: 6px; background: linear-gradient(90deg, #2F5D8C, #5E86AE 45%, #C9962E); }
+  .foot { padding: 56px 0 28px; }
+  .foot-top { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(201,214,229,.15); }
+  .foot-top .actions .btn { padding: 10px 20px; font-size: 0.92rem; }
+  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 200px)); gap: 28px; padding: 32px 0; }
+  .cols h4 { margin: 0 0 12px; font-size: 0.95rem; font-weight: 600; color: #8FA6C1; font-family: "Source Sans 3", sans-serif; }
+  .cols a { display: block; text-decoration: none; color: var(--white); font-size: 0.98rem; margin: 0 0 8px; }
+  .cols a:hover { color: var(--gold-soft); }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 0.9rem; padding-top: 22px; border-top: 1px solid rgba(201,214,229,.15); }
+  @media (max-width: 640px) { .cols { grid-template-columns: 1fr 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #lead-path { animation: none; stroke-dashoffset: 0; }
+    .art .fan path, #lead-end { animation: none; opacity: var(--o, 1); }
+    .slice, .slice p, .top, .top .wrap, .brand .mark { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top" id="topo">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Valora PPP, início da página">
+      <svg class="mark" viewBox="0 0 104 70" aria-hidden="true"><g fill="#F2F5F8"><rect x="0" y="0" width="12" height="46"/><rect x="18" y="10" width="12" height="46"/><rect x="36" y="20" width="12" height="46"/></g><g fill="#C9962E"><polygon points="55,42 67,35 67,63 55,70"/><polygon points="73,25 85,18 85,55 73,62"/><polygon points="91,7 103,1 103,46 91,53"/></g></svg>
+      <span class="wordmark"><span class="name">Valora PPP</span><span class="tag">Modelagem econômico-financeira</span></span>
+    </a>
+    <nav aria-label="Principal">
+      <a class="hide-sm" href="#concessoes">Concessões</a>
+      <a class="hide-sm" href="#modelo">O modelo</a>
+      <a class="hide-sm" href="#contato">Contato</a>
+      <a class="login" href="https://app.valorappp.com.br">Acessar o sistema</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero texture">
+    <div class="art" aria-hidden="true"><svg id="fan"></svg></div>
+    <div class="wrap">
+      <div class="hero-head">
+        <h1><span class="l1">Modelagem Econômico-Financeira</span><span class="l2">para Concessões e PPPs</span></h1>
+        <p class="lead">Do custo de capital à TIR e VPL do projeto, da dívida e do acionista em um só modelo: premissas, projeções, demonstrações e relatório técnico conclusivo, com cada número rastreável até sua origem.</p>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <div class="actions">
+            <a class="btn btn-ghost" href="https://app.valorappp.com.br">Acessar o sistema</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="cg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2F5D8C"/><stop offset=".5" stop-color="#5E86AE"/><stop offset="1" stop-color="#C9962E"/></linearGradient></defs><path d="M0 100 V64 Q720 -16 1440 64 V100 Z" fill="#F2F5F8"/><path d="M0 64 Q720 -16 1440 64" fill="none" stroke="url(#cg1)" stroke-width="6" vector-effect="non-scaling-stroke"/></svg>
+  </section>
+
+  <section class="sec" id="concessoes">
+    <div class="wrap">
+      <div class="fit-head">
+        <h2 class="one-line">Para todas as concessões, de Ferrovias à Iluminação Pública</h2>
+        <p class="intro fit">O Valora PPP aplica a teoria econômico-financeira moderna a todos os setores, facilitando e democratizando o acesso a modelagens confiáveis e de alto nível técnico.</p>
+      </div>
+      <div class="slices">
+        <article class="slice photo" tabindex="0" style="--img:url(img/ferrovia.webp)"><div class="lbl"><h3>Ferrovias</h3><p>Carga e passageiros, com receitas por tipo de serviço.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/rodovia.webp)"><div class="lbl"><h3>Rodovias</h3><p>Pedágio, receitas acessórias e ciclos de investimento.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/saneamento.webp)"><div class="lbl"><h3>Saneamento</h3><p>Água e esgoto, com metas de universalização no Capex.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/iluminacao.webp)"><div class="lbl"><h3>Iluminação pública</h3><p>PPPs com contraprestação e modernização do parque.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/parques.webp)"><div class="lbl"><h3>Parques</h3><p>Bilheteria, concessões de uso e manutenção.</p></div></article>
+      </div>
+      <div class="slices">
+        <article class="slice photo" tabindex="0" style="--img:url(img/aeroportos.webp)"><div class="lbl"><h3>Aeroportos</h3><p>Tarifas aeroportuárias, receitas comerciais e expansão por fases.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/portos.webp)"><div class="lbl"><h3>Portos</h3><p>Arrendamentos e terminais, com movimentação por tipo de carga.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/hospitais.webp)"><div class="lbl"><h3>Hospitais</h3><p>PPPs de construção e gestão, com contraprestação por desempenho.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/residuos.webp)"><div class="lbl"><h3>Resíduos sólidos</h3><p>Coleta, triagem e destinação, com receitas por tonelada.</p></div></article>
+        <article class="slice photo" tabindex="0" style="--img:url(img/mobilidade.webp)"><div class="lbl"><h3>Mobilidade urbana</h3><p>Metrô, VLT e BRT, com tarifa e demanda de passageiros.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="modelo">
+    <div class="wrap">
+      <h2 class="one-line">Um fluxo contínuo e intuitivo, das premissas ao resultado.</h2>
+      <p class="intro one-line-p">Cada etapa alimenta a seguinte. Você informa as premissas e o sistema monta as demonstrações e os indicadores de viabilidade.</p>
+      <div class="flow-grid">
+        <nav class="steps" aria-label="Etapas do modelo">
+          <span class="steps-title">O fluxo do Valora PPP</span>
+          <ol>
+            <li><a href="#etapa-1"><b>1</b>Input: Capex, Opex, Receita</a></li>
+            <li><a href="#etapa-2"><b>2</b>Custo de Capital</a></li>
+            <li><a href="#etapa-3"><b>3</b>Financiamento e Outorga</a></li>
+            <li><a href="#etapa-4"><b>4</b>Projeções e Cenários</a></li>
+            <li><a href="#etapa-5"><b>5</b>Demonstrações</a></li>
+            <li><a href="#etapa-6"><b>6</b>Resultados e Relatórios</a></li>
+          </ol>
+        </nav>
+        <ol class="cards">
+          <li class="card" id="etapa-1"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><rect x="8" y="8" width="56" height="5" rx="2.5" fill="#C9D6E5" opacity=".5"/>
+<g><rect x="8" y="22" width="46" height="5" rx="2.5" fill="#C9D6E5" opacity=".45"/><rect x="66" y="17" width="86" height="14" rx="4" fill="#0B1F3B" stroke="#C9D6E5" stroke-opacity=".3"/><rect x="72" y="22" width="44" height="4" rx="2" fill="#C9962E" opacity="1"/><rect x="8" y="42" width="46" height="5" rx="2.5" fill="#C9D6E5" opacity=".45"/><rect x="66" y="37" width="86" height="14" rx="4" fill="#0B1F3B" stroke="#C9D6E5" stroke-opacity=".3"/><rect x="72" y="42" width="30" height="4" rx="2" fill="#C9D6E5" opacity="0.6"/><rect x="8" y="62" width="46" height="5" rx="2.5" fill="#C9D6E5" opacity=".45"/><rect x="66" y="57" width="86" height="14" rx="4" fill="#0B1F3B" stroke="#C9D6E5" stroke-opacity=".3"/><rect x="72" y="62" width="56" height="4" rx="2" fill="#C9D6E5" opacity="0.6"/></g>
+<g transform="translate(164 30)"><rect x="0" y="0" width="28" height="36" rx="4" fill="#2F5D8C" opacity=".6"/><path d="M6 10 H22 M6 17 H22 M6 24 H16" stroke="#C9D6E5" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/><path d="M14 44 V58 M8 52 L14 58 L20 52" stroke="#C9962E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="8" y="84" width="144" height="16" rx="8" fill="#C9962E" opacity=".9"/><rect x="58" y="90" width="44" height="4" rx="2" fill="#0B1F3B"/></svg></div><h3>Input: Capex, Opex, Receita</h3><p>Receitas por linha com seus tributos, Opex importado de planilha e Capex por rodada de investimento.</p></li>
+          <li class="card" id="etapa-2"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><rect x="8" y="10" width="40" height="5" rx="2.5" fill="#C9D6E5" opacity=".5"/>
+<rect x="8" y="22" width="112" height="14" rx="4" fill="#2F5D8C"/><rect x="122" y="22" width="70" height="14" rx="4" fill="#C9962E"/>
+<rect x="8" y="42" width="30" height="4" rx="2" fill="#C9D6E5" opacity=".35"/><rect x="122" y="42" width="24" height="4" rx="2" fill="#C9D6E5" opacity=".35"/>
+<g stroke="#C9D6E5" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"><line x1="8" y1="64" x2="192" y2="64"/><line x1="8" y1="80" x2="192" y2="80"/><line x1="8" y1="96" x2="192" y2="96"/></g>
+<g stroke="#C9962E" stroke-width="2.4" stroke-linecap="round"><line x1="8" y1="64" x2="120" y2="64"/><line x1="8" y1="80" x2="70" y2="80"/><line x1="8" y1="96" x2="150" y2="96"/></g>
+<circle cx="120" cy="64" r="4.5" fill="#fff"/><circle cx="70" cy="80" r="4.5" fill="#fff"/><circle cx="150" cy="96" r="4.5" fill="#fff"/></svg></div><h3>Custo de Capital</h3><p>Ke pelo CAPM, beta setorial de Damodaran, custo da dívida e WACC.</p></li>
+          <li class="card" id="etapa-3"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><rect x="10" y="26" width="11" height="74" rx="2" fill="#2F5D8C"/><rect x="28" y="32" width="11" height="68" rx="2" fill="#2F5D8C"/><rect x="46" y="39" width="11" height="61" rx="2" fill="#2F5D8C"/><rect x="64" y="46" width="11" height="54" rx="2" fill="#2F5D8C"/><rect x="82" y="53" width="11" height="47" rx="2" fill="#2F5D8C"/><rect x="100" y="60" width="11" height="40" rx="2" fill="#2F5D8C"/><rect x="118" y="67" width="11" height="33" rx="2" fill="#2F5D8C"/><rect x="136" y="74" width="11" height="26" rx="2" fill="#2F5D8C"/><rect x="154" y="81" width="11" height="19" rx="2" fill="#2F5D8C"/><rect x="172" y="88" width="11" height="12" rx="2" fill="#2F5D8C"/><path d="M14 40 H190" stroke="#C9962E" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+<circle cx="15" cy="40" r="2.6" fill="#C9962E"/><circle cx="33" cy="40" r="2.6" fill="#C9962E"/><circle cx="51" cy="40" r="2.6" fill="#C9962E"/><circle cx="69" cy="40" r="2.6" fill="#C9962E"/><circle cx="87" cy="40" r="2.6" fill="#C9962E"/><circle cx="105" cy="40" r="2.6" fill="#C9962E"/><circle cx="123" cy="40" r="2.6" fill="#C9962E"/><circle cx="141" cy="40" r="2.6" fill="#C9962E"/><circle cx="159" cy="40" r="2.6" fill="#C9962E"/><circle cx="177" cy="40" r="2.6" fill="#C9962E"/>
+<rect x="8" y="8" width="44" height="5" rx="2.5" fill="#C9D6E5" opacity=".5"/></svg></div><h3>Financiamento e Outorga</h3><p>Dívida por rodada de Capex, outorga fixa e variável e outorga de equilíbrio.</p></li>
+          <li class="card" id="etapa-4"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><g stroke="#C9D6E5" stroke-opacity=".12"><line x1="8" y1="28" x2="192" y2="28"/><line x1="8" y1="52" x2="192" y2="52"/><line x1="8" y1="76" x2="192" y2="76"/><line x1="8" y1="100" x2="192" y2="100"/></g>
+<defs><linearGradient id="a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9962E" stop-opacity=".45"/><stop offset="1" stop-color="#C9962E" stop-opacity="0"/></linearGradient></defs>
+<path d="M8 92 C40 88 60 76 90 66 S150 34 192 18 V100 H8 Z" fill="url(#a2)"/>
+<path d="M8 92 C40 88 60 76 90 66 S150 34 192 18" stroke="#C9962E" stroke-width="2.4"/>
+<path d="M8 96 C50 94 80 88 110 80 S170 62 192 56" stroke="#5E86AE" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="8" y="8" width="34" height="5" rx="2.5" fill="#C9D6E5" opacity=".5"/><rect x="48" y="8" width="20" height="5" rx="2.5" fill="#C9D6E5" opacity=".25"/></svg></div><h3>Projeções e Cenários</h3><p>Inflação, depreciação, capital de giro e tributos ao longo de todo o prazo, com cenários de premissas.</p></li>
+          <li class="card" id="etapa-5"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><rect x="6" y="6" width="188" height="10" rx="3" fill="#2F5D8C" opacity=".7"/><rect x="10" y="24" width="50" height="4" rx="2" fill="#C9D6E5" opacity="0.4"/><rect x="88" y="24" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="115" y="24" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="142" y="24" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="169" y="24" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="10" y="37" width="42" height="4" rx="2" fill="#C9D6E5" opacity="0.4"/><rect x="88" y="37" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="115" y="37" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="142" y="37" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="169" y="37" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="10" y="50" width="34" height="4" rx="2" fill="#C9D6E5" opacity="0.4"/><rect x="88" y="50" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="115" y="50" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="142" y="50" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="169" y="50" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="6" y="59" width="188" height="12" rx="3" fill="#C9962E" opacity=".22"/><rect x="10" y="63" width="50" height="4" rx="2" fill="#C9D6E5" opacity="0.7"/><rect x="88" y="63" width="20" height="4" rx="2" fill="#C9962E" opacity="0.95"/><rect x="115" y="63" width="20" height="4" rx="2" fill="#C9962E" opacity="0.95"/><rect x="142" y="63" width="20" height="4" rx="2" fill="#C9962E" opacity="0.95"/><rect x="169" y="63" width="20" height="4" rx="2" fill="#C9962E" opacity="0.95"/><rect x="10" y="76" width="42" height="4" rx="2" fill="#C9D6E5" opacity="0.4"/><rect x="88" y="76" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="115" y="76" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="142" y="76" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="169" y="76" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="10" y="89" width="34" height="4" rx="2" fill="#C9D6E5" opacity="0.4"/><rect x="88" y="89" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="115" y="89" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="142" y="89" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/><rect x="169" y="89" width="20" height="4" rx="2" fill="#C9D6E5" opacity="0.3"/></svg></div><h3>Demonstrações</h3><p>DRE, fluxo de caixa livre, fluxo do acionista, DFC e balanço.</p></li>
+          <li class="card" id="etapa-6"><div class="ui"><svg viewBox="0 0 200 110" fill="none" aria-hidden="true"><rect x="44" y="6" width="74" height="98" rx="5" fill="#0B1F3B" stroke="#C9D6E5" stroke-opacity=".3"/>
+<rect x="52" y="14" width="40" height="5" rx="2.5" fill="#C9D6E5" opacity=".55"/>
+<rect x="52" y="26" width="58" height="3" rx="1.5" fill="#C9D6E5" opacity=".28"/><rect x="52" y="34" width="44" height="3" rx="1.5" fill="#C9D6E5" opacity=".28"/><rect x="52" y="42" width="58" height="3" rx="1.5" fill="#C9D6E5" opacity=".28"/><rect x="52" y="50" width="44" height="3" rx="1.5" fill="#C9D6E5" opacity=".28"/>
+<g transform="translate(81 80)"><circle r="14" stroke="#C9D6E5" stroke-opacity=".18" stroke-width="6"/><circle r="14" stroke="#C9962E" stroke-width="6" stroke-dasharray="58 88" transform="rotate(-90)" stroke-linecap="round"/></g>
+<rect x="128" y="22" width="62" height="26" rx="6" fill="#2F5D8C" opacity=".55"/><rect x="136" y="30" width="26" height="4" rx="2" fill="#C9D6E5" opacity=".6"/><rect x="136" y="38" width="40" height="5" rx="2.5" fill="#C9962E"/>
+<rect x="128" y="56" width="62" height="26" rx="6" fill="#2F5D8C" opacity=".35"/><rect x="136" y="64" width="22" height="4" rx="2" fill="#C9D6E5" opacity=".5"/><rect x="136" y="72" width="34" height="5" rx="2.5" fill="#C9D6E5" opacity=".7"/></svg></div><h3>Resultados e Relatórios</h3><p>TIR e VPL do projeto, da dívida e do acionista, com relatório técnico em PDF e exportação para Excel.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="audit texture" id="principios">
+    <svg class="curve" style="margin:0 0 24px" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H1440 V36 Q720 116 0 36 Z" fill="#FFFFFF"/></svg>
+    <div class="wrap">
+      <div class="audit-grid">
+        <div>
+          <h2 class="sec-h" style="font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.15;letter-spacing:-.015em;margin:0 0 14px">Feito para ser auditado</h2>
+          <p class="intro" style="margin:0 0 34px;max-width:52ch">Um estudo de viabilidade é lido por quem precisa conferir. O Valora PPP segue a boa prática de modelagem, não os atalhos das planilhas.</p>
+          <ul class="principles">
+            <li><div><h3>Modelo em valores reais</h3><p>Premissas reais do início ao fim, com o efeito da inflação tratado onde ele de fato existe: depreciação, créditos tributários e capital de giro.</p></div></li>
+            <li><div><h3>Tributação brasileira no lucro real</h3><p>IR e CSLL calculados numa base única, com tributos sobre a receita definidos por linha de atividade.</p></div></li>
+            <li><div><h3>Contas que fecham</h3><p>Fluxo do acionista igual ao fluxo livre mais o da dívida, DRE coerente com o caixa, balanço equilibrado.</p></div></li>
+            <li><div><h3>Relatório que embasa a decisão</h3><p>Premissas, demonstrações, gráficos e indicadores num documento técnico pronto para análise.</p></div></li>
+          </ul>
+        </div>
+        <div class="stack" aria-hidden="true">
+          <div class="win w1"><svg viewBox="0 0 300 180" fill="none"><rect x="0" y="0" width="300" height="22" fill="#0B1F3B" opacity=".6"/><circle cx="12" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><circle cx="22" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><rect x="40" y="8" width="60" height="6" rx="3" fill="#C9D6E5" opacity=".35"/><rect x="14" y="36" width="70" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="36" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="36" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="36" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="36" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="53" width="58" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="53" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="53" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="53" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="53" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="70" width="46" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="70" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="70" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="70" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="70" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="87" width="70" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="87" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="87" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="87" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="87" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="104" width="58" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="104" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="104" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="104" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="104" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="121" width="46" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="121" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="121" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="121" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="121" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="138" width="70" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="138" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="170" y="138" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="210" y="138" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="250" y="138" width="28" height="5" rx="2.5" fill="#C9D6E5" opacity="0.25"/><rect x="14" y="155" width="58" height="5" rx="2.5" fill="#C9D6E5" opacity=".4"/><rect x="130" y="155" width="28" height="5" rx="2.5" fill="#C9962E" opacity="0.9"/><rect x="170" y="155" width="28" height="5" rx="2.5" fill="#C9962E" opacity="0.9"/><rect x="210" y="155" width="28" height="5" rx="2.5" fill="#C9962E" opacity="0.9"/><rect x="250" y="155" width="28" height="5" rx="2.5" fill="#C9962E" opacity="0.9"/><line x1="14" y1="147" x2="286" y2="147" stroke="#C9D6E5" stroke-opacity=".25"/></svg></div>
+          <div class="win w2"><svg viewBox="0 0 300 180" fill="none"><rect x="0" y="0" width="300" height="22" fill="#0B1F3B" opacity=".6"/><circle cx="12" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><circle cx="22" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><rect x="40" y="8" width="60" height="6" rx="3" fill="#C9D6E5" opacity=".35"/><g stroke="#C9D6E5" stroke-opacity=".1"><line x1="14" y1="60" x2="286" y2="60"/><line x1="14" y1="100" x2="286" y2="100"/><line x1="14" y1="140" x2="286" y2="140"/></g>
+<path d="M14 150 C60 160 80 120 120 112 S200 70 286 46" stroke="#C9962E" stroke-width="2.6"/>
+<path d="M14 156 C70 150 110 140 150 128 S240 104 286 96" stroke="#5E86AE" stroke-width="2"/>
+<circle cx="286" cy="46" r="4" fill="#C9962E"/></svg></div>
+          <div class="win w3"><svg viewBox="0 0 300 180" fill="none"><rect x="0" y="0" width="300" height="22" fill="#0B1F3B" opacity=".6"/><circle cx="12" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><circle cx="22" cy="11" r="3" fill="#C9D6E5" opacity=".3"/><rect x="40" y="8" width="60" height="6" rx="3" fill="#C9D6E5" opacity=".35"/><rect x="14" y="32" width="70" height="24" rx="6" fill="#2F5D8C" opacity=".5"/><rect x="22" y="40" width="40" height="7" rx="3.5" fill="#C9962E"/><rect x="92" y="32" width="70" height="24" rx="6" fill="#2F5D8C" opacity=".3"/><rect x="100" y="40" width="34" height="7" rx="3.5" fill="#C9D6E5" opacity=".6"/><rect x="20" y="130" width="14" height="30" rx="2" fill="#2F5D8C" opacity="0.85"/><rect x="44" y="118" width="14" height="42" rx="2" fill="#2F5D8C" opacity="0.85"/><rect x="68" y="134" width="14" height="26" rx="2" fill="#2F5D8C" opacity="0.85"/><rect x="92" y="148" width="14" height="12" rx="2" fill="#2F5D8C" opacity="0.85"/><rect x="116" y="120" width="14" height="40" rx="2" fill="#C9962E" opacity="0.85"/><rect x="140" y="104" width="14" height="56" rx="2" fill="#C9962E" opacity="0.85"/><rect x="164" y="90" width="14" height="70" rx="2" fill="#C9962E" opacity="0.85"/><rect x="188" y="78" width="14" height="82" rx="2" fill="#C9962E" opacity="0.85"/><rect x="212" y="68" width="14" height="92" rx="2" fill="#C9962E" opacity="0.85"/><rect x="236" y="56" width="14" height="104" rx="2" fill="#C9962E" opacity="0.85"/><rect x="260" y="48" width="14" height="112" rx="2" fill="#C9962E" opacity="0.85"/></svg></div>
+          <span class="badge"><i><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#0B1F3B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Identidades conferidas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-sec" id="contato">
+    <div class="wrap">
+      <div class="cta">
+        <div class="dark texture">
+          <h2>Aplique o Valora PPP ao seu projeto</h2>
+          <p>Entre em contato e solicite acesso.</p>
+        </div>
+        <div class="light">
+          <a class="btn btn-primary" href="mailto:contato@valorappp.com.br?subject=Solicita%C3%A7%C3%A3o%20de%20acesso%20ao%20Valora%20PPP">Solicitar demonstração</a>
+          <a class="btn btn-outline" href="https://app.valorappp.com.br">Já tenho login</a>
+          <span class="mail">ou escreva para <a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="rule"></div>
+  <div class="wrap foot">
+    <div class="foot-top">
+      <a class="brand" href="#" aria-label="Valora PPP, início da página">
+        <svg class="mark" viewBox="0 0 104 70" aria-hidden="true"><g fill="#F2F5F8"><rect x="0" y="0" width="12" height="46"/><rect x="18" y="10" width="12" height="46"/><rect x="36" y="20" width="12" height="46"/></g><g fill="#C9962E"><polygon points="55,42 67,35 67,63 55,70"/><polygon points="73,25 85,18 85,55 73,62"/><polygon points="91,7 103,1 103,46 91,53"/></g></svg>
+        <span class="wordmark"><span class="name">Valora PPP</span><span class="tag">Modelagem econômico-financeira</span></span>
+      </a>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:contato@valorappp.com.br?subject=Demonstra%C3%A7%C3%A3o%20do%20Valora%20PPP">Solicitar demonstração</a>
+        <a class="btn btn-ghost" href="https://app.valorappp.com.br">Acessar o sistema</a>
+      </div>
+    </div>
+    <div class="cols">
+      <div><h4>Plataforma</h4><a href="#concessoes">Concessões</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
+      <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
+      <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
+    </div>
+    <div class="legal">
+      <span>© <span id="ano">2026</span> Valora PPP</span>
+      <span>Desenvolvimento: Dalmo Silveira | Economista | Corecon/SP 33884</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var y = document.getElementById('ano');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Texto de abertura: ajusta o tamanho para ocupar exatamente 3 linhas na largura do título
+    var lead = document.querySelector('.hero .lead');
+    var setSize = function (px) { if (lead) lead.setAttribute('style', px ? 'font-size:' + px + 'px' : ''); };
+    var fitLead = function () {
+      try {
+        if (!lead || !lead.getBoundingClientRect) return;
+        if (window.innerWidth < 900) { setSize(0); return; }
+        var h1 = parseFloat(window.getComputedStyle(document.querySelector('.hero h1')).fontSize) || 56;
+        var lo = 15, hi = Math.max(16, h1 * 0.46);
+        for (var i = 0; i < 18; i++) {
+          var mid = (lo + hi) / 2;
+          setSize(mid);
+          var lh = parseFloat(window.getComputedStyle(lead).lineHeight) || mid * 1.55;
+          var lines = Math.round(lead.getBoundingClientRect().height / lh);
+          if (lines > 3) hi = mid; else lo = mid;
+        }
+        setSize(Math.floor(lo * 10) / 10);
+      } catch (e) { /* mantém o tamanho definido no CSS */ }
+    };
+    fitLead();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLead);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fitLead, 120); });
+
+    // Cabeçalho compacto ao rolar
+    var top = document.getElementById('topo');
+    var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Leque de trajetórias: muitos futuros possíveis de um projeto, um caminho em destaque.
+    // Desenhado no tamanho real da faixa: nasce embaixo à esquerda e termina no alto à direita.
+    var svg = document.getElementById('fan');
+    if (!svg) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var el = function (n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; };
+    var drawFan = function (animate) {
+      var W = svg.clientWidth || svg.getBoundingClientRect().width, H = svg.clientHeight || svg.getBoundingClientRect().height;
+      if (!W || !H) return;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      var narrow = W < 900;
+      var seed = 7;
+      var rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      var gauss = function () { var u = rnd() || 1e-9, v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+      var X0 = W * 0.015, X1 = W * (narrow ? 0.96 : 0.955);
+      var Y0 = H * (narrow ? 0.93 : 0.86), TOP = H * (narrow ? 0.79 : 0.24);
+      var amp = Y0 - TOP, dip = Math.min(70, H * (narrow ? 0.035 : 0.07)), N = narrow ? 24 : 40;
+      var base = function (u) { return amp * Math.pow(u, 2.1) - dip * Math.exp(-Math.pow((u - 0.09) / 0.07, 2)); };
+      var smooth = function (pts) {
+        var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+        for (var k = 0; k < pts.length - 1; k++) {
+          var p0 = pts[k - 1] || pts[k], p1 = pts[k], p2 = pts[k + 1], p3 = pts[k + 2] || p2;
+          d += ' C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' +
+               (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' +
+               p2[0].toFixed(1) + ' ' + p2[1].toFixed(1);
+        }
+        return d;
+      };
+      var noise = H * (narrow ? 0.0025 : 0.0032);
+      var path = function (scale, sigma) {
+        var pts = [], drift = 0;
+        for (var i = 0; i <= N; i++) {
+          var u = i / N;
+          drift = drift * 0.9 + gauss() * sigma * noise * (0.4 + u * 1.6);
+          pts.push([X0 + (X1 - X0) * u, Y0 - base(u) * scale - drift]);
+        }
+        return pts;
+      };
+      var defs = el('defs', {});
+      defs.innerHTML =
+        '<linearGradient id="fanStroke" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="' + W + '" y2="0"><stop offset="0" stop-color="#C9D6E5" stop-opacity=".12"/><stop offset=".45" stop-color="#C9D6E5" stop-opacity=".5"/><stop offset="1" stop-color="#C9D6E5" stop-opacity=".9"/></linearGradient>' +
+        '<linearGradient id="goldStroke" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="' + W + '" y2="0"><stop offset="0" stop-color="#C9962E" stop-opacity=".35"/><stop offset=".35" stop-color="#C9962E"/><stop offset="1" stop-color="#F0CC72"/></linearGradient>' +
+        '<filter id="glow" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+      svg.appendChild(defs);
+      svg.appendChild(el('line', { x1: X0, x2: X1, y1: Y0, y2: Y0, stroke: '#C9D6E5', 'stroke-opacity': .16, 'stroke-dasharray': '2 7' }));
+      var fan = el('g', { class: animate ? 'fan' : '', fill: 'none', 'stroke-linecap': 'round' });
+      var count = narrow ? 34 : 58;
+      for (var k = 0; k < count; k++) {
+        var sc = 0.6 + rnd() * 0.55;
+        var p = el('path', { d: smooth(path(sc, 2.6 + rnd() * 3)), stroke: 'url(#fanStroke)', 'stroke-width': (0.6 + rnd() * 0.8).toFixed(2) });
+        var o = (0.25 + rnd() * 0.5).toFixed(2);
+        if (animate) { p.style.setProperty('--o', o); p.style.animationDelay = (0.15 + rnd() * 0.9).toFixed(2) + 's'; }
+        else { p.setAttribute('opacity', o); rnd(); }
+        fan.appendChild(p);
+      }
+      svg.appendChild(fan);
+      var lead = path(1, 1);
+      var lp = el('path', { id: animate ? 'lead-path' : '', d: smooth(lead), fill: 'none', stroke: 'url(#goldStroke)', 'stroke-width': 3.2, 'stroke-linecap': 'round', filter: 'url(#glow)' });
+      svg.appendChild(lp);
+      if (animate && lp.getTotalLength) lp.setAttribute('style', '--len:' + Math.ceil(lp.getTotalLength()));
+      var end = lead[lead.length - 1];
+      var g = el('g', { id: animate ? 'lead-end' : '' });
+      g.appendChild(el('circle', { cx: end[0], cy: end[1], r: 16, fill: 'none', stroke: '#F0CC72', 'stroke-opacity': .35 }));
+      g.appendChild(el('circle', { cx: end[0], cy: end[1], r: 5.5, fill: '#F0CC72', filter: 'url(#glow)' }));
+      svg.appendChild(g);
+      svg.appendChild(el('circle', { cx: X0, cy: Y0, r: 3.5, fill: '#C9D6E5', 'fill-opacity': .8 }));
+    };
+    try { drawFan(true); } catch (e) {}
+    var lastW = window.innerWidth, ft;
+    window.addEventListener('resize', function () {
+      clearTimeout(ft);
+      ft = setTimeout(function () { if (Math.abs(window.innerWidth - lastW) > 40) { lastW = window.innerWidth; try { drawFan(false); } catch (e) {} } }, 150);
+    });
+  })();
+</script>
+</body>
+</html>
