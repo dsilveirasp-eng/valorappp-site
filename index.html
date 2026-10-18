@@ -464,6 +464,34 @@
     .art .fan path, #lead-end { animation: none; opacity: var(--o, 1); }
     .slice, .slice p, .top, .top .wrap, .brand .mark { transition: none; }
   }
+
+  /* Referências bibliográficas */
+  #referencias { background: var(--paper); border-top: 1px solid var(--line); }
+  .ref-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .ref-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 28px 24px; position: relative; }
+  .ref-card::before { content: ""; position: absolute; left: 28px; top: 0; width: 36px; height: 3px; background: var(--gold); border-radius: 0 0 3px 3px; }
+  .ref-card h3 { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 1.08rem; line-height: 1.3; color: var(--navy); margin: 4px 0 6px; }
+  .ref-card .use { display: block; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--steel); font-weight: 600; margin: 0 0 16px; }
+  .ref-card ol { list-style: none; margin: 0; padding: 0; }
+  .ref-card li { font-size: .95rem; line-height: 1.55; color: var(--ink-soft); padding: 11px 0; border-top: 1px solid #E6ECF3; text-align: left; overflow-wrap: anywhere; }
+  .ref-card li:first-child { border-top: 0; padding-top: 0; }
+  .ref-card li b { color: var(--navy); font-weight: 600; }
+  .ref-card li i { font-style: italic; color: var(--navy-3); }
+  .ref-base { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; background: var(--navy); border-color: var(--navy); }
+  .ref-base h3 { color: var(--white); }
+  .ref-base .use { color: var(--gold-soft); }
+  .ref-base p { margin: 0; color: var(--mist); font-size: 1rem; line-height: 1.6; }
+  .ref-base p b { color: var(--white); font-weight: 600; }
+  .ref-base .btn { white-space: nowrap; }
+  .ref-note { margin: 26px 0 0; font-size: .92rem; color: var(--ink-soft); }
+  @media (max-width: 1180px) { .ref-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 720px) {
+    .ref-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .ref-card { padding: 24px 20px 20px; }
+    .ref-card::before { left: 20px; }
+    .ref-base { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .ref-base .btn { white-space: normal; justify-self: start; }
+  }
 </style>
 </head>
 <body>
@@ -682,6 +710,23 @@
     </div>
   </section>
 
+  <section class="sec" id="referencias">
+    <div class="wrap">
+      <h2 class="one-line">Referências bibliográficas</h2>
+      <p class="intro wide">A modelagem do Valora PPP se apoia na teoria clássica de finanças, na literatura de avaliação e project finance e nas normas contábeis e tributárias brasileiras.</p>
+      <div class="ref-grid">
+        <article class="ref-card ref-base"><div><h3>Trabalho de base</h3><span class="use">Origem do módulo de custo de capital</span><p><b>SILVEIRA, Dalmo.</b> Comparação entre beta setorial de Damodaran e beta empírico da Rumo S.A. no CAPM ferroviário brasileiro. 2026. Trabalho de Conclusão de Curso (Especialização em Engenharia Econômica e Financeira Aplicada aos Negócios) – Universidade Federal de Goiás, Goiânia, 2026.</p></div><a class="btn btn-primary" href="docs/tcc-beta-ferroviario-dalmo-silveira.pdf" target="_blank" rel="noopener">Ler o trabalho (PDF)</a></article>
+        <article class="ref-card"><h3>Risco e custo de capital próprio</h3><span class="use">Beta, CAPM e Ke</span><ol><li><b>MARKOWITZ, Harry.</b> Portfolio selection. <i>The Journal of Finance</i>, v. 7, n. 1, p. 77-91, 1952.</li><li><b>SHARPE, William F.</b> Capital asset prices: a theory of market equilibrium under conditions of risk. <i>The Journal of Finance</i>, v. 19, n. 3, p. 425-442, 1964.</li><li><b>LINTNER, John.</b> The valuation of risk assets and the selection of risky investments in stock portfolios and capital budgets. <i>The Review of Economics and Statistics</i>, v. 47, n. 1, p. 13-37, 1965.</li><li><b>MOSSIN, Jan.</b> Equilibrium in a capital asset market. <i>Econometrica</i>, v. 34, n. 4, p. 768-783, 1966.</li><li><b>HAMADA, Robert S.</b> The effect of the firm's capital structure on the systematic risk of common stocks. <i>The Journal of Finance</i>, v. 27, n. 2, p. 435-452, 1972.</li><li><b>DAMODARAN, Aswath.</b> <i>Damodaran Online</i>: betas by sector. New York: NYU Stern School of Business. Disponível em: pages.stern.nyu.edu/~adamodar.</li></ol></article>
+        <article class="ref-card"><h3>Estrutura de capital e WACC</h3><span class="use">Alavancagem, Kd e WACC</span><ol><li><b>MODIGLIANI, Franco; MILLER, Merton H.</b> The cost of capital, corporation finance and the theory of investment. <i>The American Economic Review</i>, v. 48, n. 3, p. 261-297, 1958.</li><li><b>KRAUS, Alan; LITZENBERGER, Robert H.</b> A state-preference model of optimal financial leverage. <i>The Journal of Finance</i>, v. 28, n. 4, p. 911-922, 1973.</li><li><b>BREALEY, Richard A.; MYERS, Stewart C.; ALLEN, Franklin.</b> <i>Principles of corporate finance</i>. 10. ed. New York: McGraw-Hill/Irwin, 2011.</li><li><b>ROSS, Stephen A.; WESTERFIELD, Randolph W.; JAFFE, Jeffrey F.</b> <i>Administração financeira</i>. 10. ed. Porto Alegre: AMGH, 2015.</li></ol></article>
+        <article class="ref-card"><h3>Avaliação e fluxos de caixa</h3><span class="use">FCL, FCA, VPL e TIR</span><ol><li><b>ASSAF NETO, Alexandre.</b> <i>Finanças corporativas e valor</i>. 7. ed. São Paulo: Atlas, 2014.</li><li><b>ASSAF NETO, Alexandre.</b> <i>Valuation</i>: métricas de valor e avaliação de empresas. 2. ed. São Paulo: Atlas, 2017.</li><li><b>SERRA, Ricardo Goulart; WICKERT, Michael.</b> <i>Valuation</i>: guia fundamental e modelagem em Excel. São Paulo: Atlas, 2019.</li><li><b>DAMODARAN, Aswath.</b> <i>Investment valuation</i>: tools and techniques for determining the value of any asset. 3. ed. New York: John Wiley &amp; Sons, 2012.</li><li><b>DAMODARAN, Aswath.</b> <i>Valuation</i>: como avaliar empresas e escolher as melhores ações. Rio de Janeiro: LTC, 2012.</li></ol></article>
+        <article class="ref-card"><h3>Project finance e concessões</h3><span class="use">Financiamento, outorga e equilíbrio</span><ol><li><b>GATTI, Stefano.</b> <i>Project finance in theory and practice</i>: designing, structuring, and financing private and public projects. 4. ed. London: Academic Press, 2024.</li><li><b>BRASIL.</b> Lei nº 8.987, de 13 de fevereiro de 1995. Dispõe sobre o regime de concessão e permissão da prestação de serviços públicos.</li><li><b>BRASIL.</b> Lei nº 11.079, de 30 de dezembro de 2004. Institui normas gerais para licitação e contratação de parceria público-privada.</li></ol></article>
+        <article class="ref-card"><h3>Demonstrações e normas contábeis</h3><span class="use">DRE, DFC, balanço e outorga</span><ol><li><b>ASSAF NETO, Alexandre.</b> <i>Estrutura e análise de balanços</i>: um enfoque econômico-financeiro. 12. ed. São Paulo: Atlas, 2020.</li><li><b>GARRISON, Ray H.; NOREEN, Eric W.; BREWER, Peter C.</b> <i>Contabilidade gerencial</i>. 14. ed. Porto Alegre: AMGH, 2013.</li><li><b>CPC.</b> CPC 03 (R2): Demonstração dos Fluxos de Caixa. CPC 04 (R1): Ativo Intangível. CPC 12: Ajuste a Valor Presente. Brasília: Comitê de Pronunciamentos Contábeis.</li><li><b>CPC.</b> ICPC 01 (R1): Contratos de Concessão. OCPC 05: Contratos de Concessão. Brasília: Comitê de Pronunciamentos Contábeis.</li></ol></article>
+        <article class="ref-card"><h3>Tributação no lucro real</h3><span class="use">IR, CSLL e base fiscal</span><ol><li><b>BRASIL.</b> Lei nº 9.249, de 26 de dezembro de 1995. Altera a legislação do imposto de renda das pessoas jurídicas e da contribuição social sobre o lucro líquido.</li><li><b>BRASIL.</b> Lei nº 9.065, de 20 de junho de 1995. Art. 15: compensação de prejuízos fiscais limitada a 30% do lucro real.</li><li><b>BRASIL.</b> Lei nº 12.973, de 13 de maio de 2014. Adequa a legislação tributária às normas contábeis convergidas.</li></ol></article>
+      </div>
+      <p class="ref-note">Referências conforme a ABNT NBR 6023. Normas e leis em sua redação vigente.</p>
+    </div>
+  </section>
+
   <section class="cta-sec" id="contato">
     <div class="wrap">
       <div class="cta">
@@ -713,7 +758,7 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#motor">Por dentro do motor</a><a href="#principios">Princípios</a></div>
+      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#motor">Por dentro do motor</a><a href="#principios">Princípios</a><a href="#referencias">Referências</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
     </div>
