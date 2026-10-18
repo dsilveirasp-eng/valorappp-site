@@ -178,8 +178,10 @@
   /* Propósito */
   #proposito { padding-top: 40px; }
   .purpose-head { margin-bottom: 44px; }
-  .purpose-head h2 { margin: 0 0 16px; max-width: 30ch; }
-  .purpose-head p { margin: 0; color: var(--ink-soft); font-size: 1.125rem; line-height: 1.65; max-width: 70ch; }
+  .purpose-head h2 { margin: 0 0 18px; max-width: none; text-wrap: balance; }
+  .purpose-head p { margin: 0; color: var(--ink-soft); font-size: clamp(1.125rem, 1.35vw, 1.3rem); line-height: 1.65; width: 0; min-width: 100%; }
+  .purpose-head { width: fit-content; max-width: 100%; }
+  @media (max-width: 760px) { .purpose-head p { width: auto; } }
   .pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .pillar { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 30px; display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 20px; align-items: start; }
   .pillar .ico { grid-row: span 2; margin-bottom: 0 !important; }
