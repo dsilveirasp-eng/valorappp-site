@@ -883,7 +883,17 @@
       var X0 = W * 0.015, X1 = W * (narrow ? 0.96 : 0.955);
       var Y0 = H * (narrow ? 0.93 : 0.86), TOP = H * (narrow ? 0.79 : 0.24);
       var amp = Y0 - TOP, dip = Math.min(70, H * (narrow ? 0.035 : 0.07)), N = narrow ? 24 : 40;
-      var base = function (u) { return amp * Math.pow(u, 2.1) - dip * Math.exp(-Math.pow((u - 0.09) / 0.07, 2)); };
+      // Afastamento do texto: no desktop, a curvatura sobe o necessário para o leque passar abaixo do bloco de texto
+      var curv = 2.1;
+      if (!narrow) {
+        try {
+          var hh = document.querySelector('.hero-head'), sr = svg.getBoundingClientRect(), tr = hh.getBoundingClientRect();
+          var GAP = Math.max(48, W * 0.035), xr = tr.right - sr.left + GAP, yb = tr.bottom - sr.top + GAP;
+          var ur = (xr - X0) / (X1 - X0), folga = (Y0 - yb) / (1.25 * amp);
+          if (ur > 0 && ur < 1 && folga > 0 && folga < 1) curv = Math.min(4.2, Math.max(curv, Math.log(folga) / Math.log(ur)));
+        } catch (e) {}
+      }
+      var base = function (u) { return amp * Math.pow(u, curv) - dip * Math.exp(-Math.pow((u - 0.09) / 0.07, 2)); };
       var smooth = function (pts) {
         var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
         for (var k = 0; k < pts.length - 1; k++) {
@@ -933,7 +943,10 @@
       svg.appendChild(g);
       svg.appendChild(el('circle', { cx: X0, cy: Y0, r: 3.5, fill: '#C9D6E5', 'fill-opacity': .8 }));
     };
-    try { drawFan(true); } catch (e) {}
+    // Desenha depois que as fontes carregam: a largura do texto muda e o leque se ajusta a ela
+    var desenhou = false, primeiro = function () { if (desenhou) return; desenhou = true; try { drawFan(true); } catch (e) {} };
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { setTimeout(primeiro, 30); }); setTimeout(primeiro, 1200); }
+    else primeiro();
     var lastW = window.innerWidth, ft;
     window.addEventListener('resize', function () {
       clearTimeout(ft);
