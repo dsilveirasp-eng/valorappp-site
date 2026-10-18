@@ -87,6 +87,25 @@
     .top nav .login { padding: 7px 14px; font-size: 0.92rem; }
   }
 
+  .beta-tag {
+    align-self: flex-start; margin-top: 2px;
+    font-family: "Montserrat", sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+    color: var(--navy); background: var(--gold); border-radius: 999px; padding: 3px 9px; line-height: 1.2;
+  }
+  .top.scrolled .beta-tag { margin-top: 0; font-size: .62rem; padding: 2px 8px; }
+  .beta-note { display: flex; align-items: flex-start; gap: 14px; padding: 20px 0 22px; border-top: 1px solid rgba(201,214,229,.15); }
+  .beta-note p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--mist); max-width: 110ch; }
+  .beta-pill { flex: none; font-family: "Montserrat", sans-serif; font-size: .74rem; font-weight: 700; color: var(--navy); background: var(--gold); border-radius: 999px; padding: 4px 12px; margin-top: 1px; white-space: nowrap; }
+  @media (max-width: 640px) { .beta-note { flex-direction: column; gap: 10px; } }
+  @media (max-width: 440px) {
+    .top .wrap { gap: 8px; }
+    .brand { gap: 8px; }
+    .brand .mark, .top.scrolled .brand .mark { width: 34px; }
+    .wordmark .name, .top.scrolled .wordmark .name { font-size: 1.15rem !important; }
+    .beta-tag, .top.scrolled .beta-tag { font-size: .58rem; padding: 2px 7px; }
+    .top nav .login { padding: 6px 11px; font-size: .82rem; }
+  }
+
   /* Botões */
   .actions { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn {
@@ -322,6 +341,54 @@
   @media (max-width: 1080px) { .flow-grid { grid-template-columns: 1fr; } .steps { position: static; } .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
 
+
+  /* Por dentro do motor (fluxograma) */
+  #motor { background: var(--white); border-top: 1px solid var(--line); }
+  .sec .intro.wide { max-width: none; font-size: clamp(1.125rem, 1.35vw, 1.3rem); line-height: 1.65; }
+  .engine-wrap {
+    position: relative; isolation: isolate; overflow: hidden;
+    margin-top: 8px; border-radius: 20px;
+    background: linear-gradient(135deg, var(--navy) 0%, #0F2A4C 55%, var(--navy-2) 100%);
+    box-shadow: 0 30px 60px -30px rgba(11,31,59,.55);
+  }
+  .engine-wrap::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(201,214,229,.05) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(25deg, rgba(201,214,229,.035) 0 1px, transparent 1px 22px);
+    -webkit-mask-image: radial-gradient(90% 80% at 50% 40%, #000 30%, transparent 85%);
+            mask-image: radial-gradient(90% 80% at 50% 40%, #000 30%, transparent 85%);
+  }
+  .engine-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 10px 8px 0; }
+  #engine { display: block; width: 100%; min-width: 1080px; height: auto; font-family: "Source Sans 3", system-ui, sans-serif; }
+  #engine .col-t { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 15px; fill: var(--white); letter-spacing: .01em; }
+  #engine .col-l { stroke: var(--gold); stroke-width: 3; stroke-linecap: round; }
+  #engine .core-bg { fill: url(#core-panel); stroke: rgba(201,150,46,.55); stroke-width: 1.2; }
+  #engine .core-t { font-family: "Montserrat", sans-serif; font-size: 12px; font-weight: 600; fill: var(--gold-soft); letter-spacing: .2em; }
+  #engine .e { fill: none; stroke: rgba(201,214,229,.26); stroke-width: 1.2; transition: stroke .2s, stroke-width .2s, opacity .2s; }
+  #engine .et { stroke: rgba(226,185,90,.7); stroke-dasharray: 6 5; stroke-width: 1.5; }
+  #engine .er { stroke: rgba(226,185,90,.85); stroke-dasharray: 2 6; stroke-width: 2; stroke-linecap: round; }
+  #engine .ah { fill: rgba(201,214,229,.55); } #engine .ahg { fill: var(--gold-soft); }
+  #engine .n { cursor: pointer; outline: none; transition: opacity .2s; }
+  #engine .n rect { fill: rgba(22,48,79,.92); stroke: rgba(201,214,229,.22); stroke-width: 1; transition: stroke .2s, fill .2s; }
+  #engine .n:hover rect { stroke: rgba(201,214,229,.6); }
+  #engine .nt { font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 15.5px; fill: var(--white); }
+  #engine .n-core rect { fill: #0E2645; stroke: rgba(201,214,229,.4); }
+  #engine .n-res rect { stroke: rgba(201,150,46,.75); stroke-width: 1.3; }
+  #engine .dot { fill: var(--gold); }
+  #engine.focus .n { opacity: .25; } #engine.focus .e { opacity: .08; }
+  #engine.focus .n.on { opacity: 1; }
+  #engine.focus .n.on rect { stroke: rgba(201,214,229,.7); }
+  #engine.focus .n.sel rect { stroke: var(--gold); stroke-width: 2.2; fill: #1B416A; }
+  #engine.focus .e.on { opacity: 1; stroke: var(--gold-soft); stroke-width: 2.2; }
+  #engine.focus .e.on.et { stroke-dasharray: 6 5; } #engine.focus .e.on.er { stroke-dasharray: 2 6; }
+  #engine .n:focus-visible rect { stroke: var(--gold); stroke-width: 2.4; }
+  .engine-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding: 6px 28px 22px; color: var(--mist); font-size: .95rem; }
+  .engine-legend { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+  .engine-legend li { display: inline-flex; align-items: center; gap: 10px; }
+  .engine-legend svg { width: 34px; height: 10px; }
+  .engine-hint { display: none; }
+  @media (max-width: 1100px) { .engine-hint { display: inline; } .engine-foot { padding: 6px 20px 20px; } }
   /* Auditável: duas colunas sobre navy */
   .audit { background: var(--navy); color: var(--white); padding: 0 0 80px; }
   .audit h2 { color: var(--white); }
@@ -381,7 +448,7 @@
   /* Rodapé */
   footer { background: var(--navy); color: var(--mist); }
   .rule { height: 6px; background: linear-gradient(90deg, #2F5D8C, #5E86AE 45%, #C9962E); }
-  .foot { padding: 56px 0 28px; }
+  .foot { padding-top: 56px; padding-bottom: 28px; }
   .foot-top { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(201,214,229,.15); }
   .foot-top .actions .btn { padding: 10px 20px; font-size: 0.92rem; }
   .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 200px)); gap: 28px; padding: 32px 0; }
@@ -406,6 +473,7 @@
     <a class="brand" href="#" aria-label="Valora PPP, início da página">
       <svg class="mark" viewBox="0 0 104 70" aria-hidden="true"><g fill="#F2F5F8"><rect x="0" y="0" width="12" height="46"/><rect x="18" y="10" width="12" height="46"/><rect x="36" y="20" width="12" height="46"/></g><g fill="#C9962E"><polygon points="55,42 67,35 67,63 55,70"/><polygon points="73,25 85,18 85,55 73,62"/><polygon points="91,7 103,1 103,46 91,53"/></g></svg>
       <span class="wordmark"><span class="name">Valora PPP</span><span class="tag">Modelagem econômico-financeira</span></span>
+      <span class="beta-tag" title="Versão beta: sistema em desenvolvimento">beta</span>
     </a>
     <nav aria-label="Principal">
       <a class="hide-sm" href="#proposito">Propósito</a>
@@ -569,6 +637,24 @@
     </div>
   </section>
 
+  <section class="sec" id="motor">
+    <div class="wrap">
+      <h2 class="one-line">Por dentro do Valora PPP</h2>
+      <p class="intro wide">Cada premissa alimenta o motor de cálculo, que monta as demonstrações e os indicadores. Passe o mouse ou toque num bloco para ver de onde vêm e para onde vão os números.</p>
+      <div class="engine-wrap">
+        <div class="engine-scroll"><svg id="engine" viewBox="0 0 1440 880" role="img" aria-labelledby="engine-t engine-d"><title id="engine-t">Fluxograma do motor do Valora PPP</title><desc id="engine-d">Premissas alimentam o custo de capital e o motor de cálculo; o motor gera as demonstrações; as demonstrações e as taxas de desconto geram os indicadores, a sensibilidade, a outorga de equilíbrio e o relatório.</desc><defs><radialGradient id="glow-core" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#2F5D8C" stop-opacity=".55"/><stop offset="1" stop-color="#2F5D8C" stop-opacity="0"/></radialGradient><linearGradient id="core-panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B416A"/><stop offset="1" stop-color="#122E4F"/></linearGradient><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ahg"/></marker></defs><ellipse cx="740.0" cy="370" rx="330" ry="330" fill="url(#glow-core)"/><rect class="core-bg" x="602" y="116" width="276" height="526" rx="22"/><text class="col-t" x="36" y="52">Premissas</text><line class="col-l" x1="36" x2="72" y1="66" y2="66"/><text class="col-t" x="330" y="52">Custo de capital</text><line class="col-l" x1="330" x2="366" y1="66" y2="66"/><text class="col-t" x="624" y="52">Motor de cálculo</text><line class="col-l" x1="624" x2="660" y1="66" y2="66"/><text class="col-t" x="918" y="52">Demonstrações</text><line class="col-l" x1="918" x2="954" y1="66" y2="66"/><text class="col-t" x="1172" y="52">Resultados</text><line class="col-l" x1="1172" x2="1208" y1="66" y2="66"/><g class="edges"><path class="e" data-a="prazo" data-b="deprec" d="M268.0 149.0 C446.0 149.0 446.0 169.0 624.0 169.0" marker-end="url(#ah)"/><path class="e" data-a="prazo" data-b="oper" d="M268.0 149.0 C446.0 149.0 446.0 337.0 624.0 337.0" marker-end="url(#ah)"/><path class="e" data-a="infl" data-b="deprec" d="M268.0 229.0 C446.0 229.0 446.0 169.0 624.0 169.0" marker-end="url(#ah)"/><path class="e" data-a="infl" data-b="ir" d="M268.0 229.0 C446.0 229.0 446.0 421.0 624.0 421.0" marker-end="url(#ah)"/><path class="e" data-a="capex" data-b="deprec" d="M268.0 309.0 C446.0 309.0 446.0 169.0 624.0 169.0" marker-end="url(#ah)"/><path class="e" data-a="capex" data-b="divida" d="M268.0 309.0 C446.0 309.0 446.0 253.0 624.0 253.0" marker-end="url(#ah)"/><path class="e" data-a="capex" data-b="fcl" d="M268.0 309.0 C593.0 309.0 593.0 279.0 918.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="receita" data-b="oper" d="M268.0 389.0 C446.0 389.0 446.0 337.0 624.0 337.0" marker-end="url(#ah)"/><path class="e" data-a="opex" data-b="oper" d="M268.0 469.0 C446.0 469.0 446.0 337.0 624.0 337.0" marker-end="url(#ah)"/><path class="e" data-a="trib" data-b="oper" d="M268.0 549.0 C446.0 549.0 446.0 337.0 624.0 337.0" marker-end="url(#ah)"/><path class="e" data-a="trib" data-b="ir" d="M268.0 549.0 C446.0 549.0 446.0 421.0 624.0 421.0" marker-end="url(#ah)"/><path class="e" data-a="outorga" data-b="outmod" d="M268.0 629.0 C446.0 629.0 446.0 589.0 624.0 589.0" marker-end="url(#ah)"/><path class="e" data-a="outorga" data-b="oper" d="M268.0 629.0 C446.0 629.0 446.0 337.0 624.0 337.0" marker-end="url(#ah)"/><path class="e" data-a="trib" data-b="ke" d="M268.0 549.0 C299.0 549.0 299.0 309.0 330.0 309.0" marker-end="url(#ah)"/><path class="e" data-a="trib" data-b="wacc" d="M268.0 549.0 C299.0 549.0 299.0 469.0 330.0 469.0" marker-end="url(#ah)"/><path class="e" data-a="alav" data-b="ke" d="M562.0 149.0 C601.6 149.0 601.6 309.0 562.0 309.0" marker-end="url(#ah)"/><path class="e" data-a="alav" data-b="wacc" d="M562.0 149.0 C619.2 149.0 619.2 469.0 562.0 469.0" marker-end="url(#ah)"/><path class="e" data-a="beta" data-b="ke" d="M446.0 258.0 L446.0 280.0" marker-end="url(#ah)"/><path class="e" data-a="ke" data-b="wacc" d="M562.0 309.0 C601.6 309.0 601.6 469.0 562.0 469.0" marker-end="url(#ah)"/><path class="e" data-a="kd" data-b="wacc" d="M446.0 418.0 L446.0 440.0" marker-end="url(#ah)"/><path class="e" data-a="alav" data-b="divida" d="M562.0 149.0 C593.0 149.0 593.0 253.0 624.0 253.0" marker-end="url(#ah)"/><path class="e" data-a="kd" data-b="divida" d="M562.0 389.0 C593.0 389.0 593.0 253.0 624.0 253.0" marker-end="url(#ah)"/><path class="e" data-a="deprec" data-b="ir" d="M856.0 169.0 C905.7 169.0 905.7 421.0 856.0 421.0" marker-end="url(#ah)"/><path class="e" data-a="deprec" data-b="dre" d="M856.0 169.0 C887.0 169.0 887.0 189.0 918.0 189.0" marker-end="url(#ah)"/><path class="e" data-a="deprec" data-b="bp" d="M856.0 169.0 C887.0 169.0 887.0 639.0 918.0 639.0" marker-end="url(#ah)"/><path class="e" data-a="oper" data-b="dre" d="M856.0 337.0 C887.0 337.0 887.0 189.0 918.0 189.0" marker-end="url(#ah)"/><path class="e" data-a="oper" data-b="fcl" d="M856.0 337.0 C887.0 337.0 887.0 279.0 918.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="oper" data-b="ir" d="M740.0 366.0 L740.0 392.0" marker-end="url(#ah)"/><path class="e" data-a="divida" data-b="ir" d="M856.0 253.0 C896.5 253.0 896.5 421.0 856.0 421.0" marker-end="url(#ah)"/><path class="e" data-a="divida" data-b="dre" d="M856.0 253.0 C887.0 253.0 887.0 189.0 918.0 189.0" marker-end="url(#ah)"/><path class="e" data-a="divida" data-b="fcd" d="M856.0 253.0 C887.0 253.0 887.0 369.0 918.0 369.0" marker-end="url(#ah)"/><path class="e" data-a="outmod" data-b="dre" d="M856.0 589.0 C887.0 589.0 887.0 189.0 918.0 189.0" marker-end="url(#ah)"/><path class="e" data-a="outmod" data-b="fcl" d="M856.0 589.0 C887.0 589.0 887.0 279.0 918.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="outmod" data-b="bp" d="M856.0 589.0 C887.0 589.0 887.0 639.0 918.0 639.0" marker-end="url(#ah)"/><path class="e" data-a="ir" data-b="dre" d="M856.0 421.0 C887.0 421.0 887.0 189.0 918.0 189.0" marker-end="url(#ah)"/><path class="e" data-a="ir" data-b="fcl" d="M856.0 421.0 C887.0 421.0 887.0 279.0 918.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="ir" data-b="fcd" d="M856.0 421.0 C887.0 421.0 887.0 369.0 918.0 369.0" marker-end="url(#ah)"/><path class="e" data-a="dre" data-b="dfc" d="M1150.0 189.0 C1211.6 189.0 1211.6 549.0 1150.0 549.0" marker-end="url(#ah)"/><path class="e" data-a="dre" data-b="bp" d="M1150.0 189.0 C1221.5 189.0 1221.5 639.0 1150.0 639.0" marker-end="url(#ah)"/><path class="e" data-a="dfc" data-b="bp" d="M1034.0 578.0 L1034.0 610.0" marker-end="url(#ah)"/><path class="e" data-a="opex" data-b="nig" d="M268.0 469.0 C446.0 469.0 446.0 505.0 624.0 505.0" marker-end="url(#ah)"/><path class="e" data-a="infl" data-b="nig" d="M268.0 229.0 C446.0 229.0 446.0 505.0 624.0 505.0" marker-end="url(#ah)"/><path class="e" data-a="nig" data-b="fcl" d="M856.0 505.0 C887.0 505.0 887.0 279.0 918.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="nig" data-b="dfc" d="M856.0 505.0 C887.0 505.0 887.0 549.0 918.0 549.0" marker-end="url(#ah)"/><path class="e" data-a="fcl" data-b="fca" d="M1150.0 279.0 C1191.8 279.0 1191.8 459.0 1150.0 459.0" marker-end="url(#ah)"/><path class="e" data-a="fcd" data-b="fca" d="M1034.0 398.0 L1034.0 430.0" marker-end="url(#ah)"/><path class="e" data-a="fcl" data-b="vplp" d="M1150.0 279.0 C1161.0 279.0 1161.0 279.0 1172.0 279.0" marker-end="url(#ah)"/><path class="e" data-a="fca" data-b="vpla" d="M1150.0 459.0 C1161.0 459.0 1161.0 459.0 1172.0 459.0" marker-end="url(#ah)"/><path class="e et" data-a="wacc" data-b="vplp" d="M562.0 469.0 C592.0 469.0 592.0 92 622.0 92 L1122.0 92 C1152.0 92 1146.0 279.0 1172.0 279.0" marker-end="url(#ahg)"/><path class="e et" data-a="ke" data-b="vpla" d="M562.0 309.0 C592.0 309.0 592.0 80 622.0 80 L1122.0 80 C1152.0 80 1146.0 459.0 1172.0 459.0" marker-end="url(#ahg)"/><path class="e" data-a="vplp" data-b="sens" d="M1404.0 279.0 C1457.9 279.0 1457.9 569.0 1404.0 569.0" marker-end="url(#ah)"/><path class="e" data-a="vpla" data-b="sens" d="M1404.0 459.0 C1438.1 459.0 1438.1 569.0 1404.0 569.0" marker-end="url(#ah)"/><path class="e" data-a="vplp" data-b="rel" d="M1404.0 279.0 C1482.1 279.0 1482.1 789.0 1404.0 789.0" marker-end="url(#ah)"/><path class="e" data-a="vpla" data-b="rel" d="M1404.0 459.0 C1462.3 459.0 1462.3 789.0 1404.0 789.0" marker-end="url(#ah)"/><path class="e" data-a="sens" data-b="rel" d="M1404.0 569.0 C1450.2 569.0 1450.2 789.0 1404.0 789.0" marker-end="url(#ah)"/><path class="e" data-a="bp" data-b="rel" d="M1150.0 639.0 C1161.0 639.0 1161.0 789.0 1172.0 789.0" marker-end="url(#ah)"/><path class="e er" data-a="fcl" data-b="eq" d="M1150.0 279.0 C1161.0 279.0 1161.0 679.0 1172.0 679.0" marker-end="url(#ahg)"/><path class="e er" data-a="eq" data-b="outorga" d="M1172.0 679.0 C1132.0 679.0 1132.0 679.0 1132.0 709.0 L1132.0 808 C1132.0 838 1132.0 838 1102.0 838 L192.0 838 C152.0 838 152.0 838 152.0 658.0" marker-end="url(#ahg)"/></g><g class="nodes"><g class="n n-in" data-id="prazo" tabindex="0" role="button" aria-label="Prazo do projeto"><rect x="36" y="120" width="232" height="58" rx="12"/><text class="nt" x="54" y="149.0" dominant-baseline="central">Prazo do projeto</text></g><g class="n n-in" data-id="infl" tabindex="0" role="button" aria-label="Inflação"><rect x="36" y="200" width="232" height="58" rx="12"/><text class="nt" x="54" y="229.0" dominant-baseline="central">Inflação</text></g><g class="n n-in" data-id="capex" tabindex="0" role="button" aria-label="Capex e Re-Capex"><rect x="36" y="280" width="232" height="58" rx="12"/><text class="nt" x="54" y="309.0" dominant-baseline="central">Capex e Re-Capex</text></g><g class="n n-in" data-id="receita" tabindex="0" role="button" aria-label="Receitas"><rect x="36" y="360" width="232" height="58" rx="12"/><text class="nt" x="54" y="389.0" dominant-baseline="central">Receitas</text></g><g class="n n-in" data-id="opex" tabindex="0" role="button" aria-label="Opex"><rect x="36" y="440" width="232" height="58" rx="12"/><text class="nt" x="54" y="469.0" dominant-baseline="central">Opex</text></g><g class="n n-in" data-id="trib" tabindex="0" role="button" aria-label="Tributos"><rect x="36" y="520" width="232" height="58" rx="12"/><text class="nt" x="54" y="549.0" dominant-baseline="central">Tributos</text></g><g class="n n-in" data-id="outorga" tabindex="0" role="button" aria-label="Outorga"><rect x="36" y="600" width="232" height="58" rx="12"/><text class="nt" x="54" y="629.0" dominant-baseline="central">Outorga</text></g><g class="n n-cap" data-id="alav" tabindex="0" role="button" aria-label="Alavancagem"><rect x="330" y="120" width="232" height="58" rx="12"/><text class="nt" x="348" y="149.0" dominant-baseline="central">Alavancagem</text></g><g class="n n-cap" data-id="beta" tabindex="0" role="button" aria-label="Beta setorial"><rect x="330" y="200" width="232" height="58" rx="12"/><text class="nt" x="348" y="229.0" dominant-baseline="central">Beta setorial</text></g><g class="n n-cap" data-id="ke" tabindex="0" role="button" aria-label="Custo próprio (Ke)"><rect x="330" y="280" width="232" height="58" rx="12"/><text class="nt" x="348" y="309.0" dominant-baseline="central">Custo próprio (Ke)</text></g><g class="n n-cap" data-id="kd" tabindex="0" role="button" aria-label="Custo da dívida (Kd)"><rect x="330" y="360" width="232" height="58" rx="12"/><text class="nt" x="348" y="389.0" dominant-baseline="central">Custo da dívida (Kd)</text></g><g class="n n-cap" data-id="wacc" tabindex="0" role="button" aria-label="WACC"><rect x="330" y="440" width="232" height="58" rx="12"/><text class="nt" x="348" y="469.0" dominant-baseline="central">WACC</text></g><g class="n n-core" data-id="deprec" tabindex="0" role="button" aria-label="Depreciação"><rect x="624" y="140" width="232" height="58" rx="12"/><text class="nt" x="642" y="169.0" dominant-baseline="central">Depreciação</text></g><g class="n n-core" data-id="divida" tabindex="0" role="button" aria-label="Financiamento"><rect x="624" y="224" width="232" height="58" rx="12"/><text class="nt" x="642" y="253.0" dominant-baseline="central">Financiamento</text></g><g class="n n-core" data-id="oper" tabindex="0" role="button" aria-label="Operação"><rect x="624" y="308" width="232" height="58" rx="12"/><text class="nt" x="642" y="337.0" dominant-baseline="central">Operação</text></g><g class="n n-core" data-id="ir" tabindex="0" role="button" aria-label="IR / CSLL"><rect x="624" y="392" width="232" height="58" rx="12"/><text class="nt" x="642" y="421.0" dominant-baseline="central">IR / CSLL</text></g><g class="n n-core" data-id="nig" tabindex="0" role="button" aria-label="Capital de giro (NIG)"><rect x="624" y="476" width="232" height="58" rx="12"/><text class="nt" x="642" y="505.0" dominant-baseline="central">Capital de giro (NIG)</text></g><g class="n n-core" data-id="outmod" tabindex="0" role="button" aria-label="Direito de outorga"><rect x="624" y="560" width="232" height="58" rx="12"/><text class="nt" x="642" y="589.0" dominant-baseline="central">Direito de outorga</text></g><g class="n n-dem" data-id="dre" tabindex="0" role="button" aria-label="DRE"><rect x="918" y="160" width="232" height="58" rx="12"/><text class="nt" x="936" y="189.0" dominant-baseline="central">DRE</text></g><g class="n n-dem" data-id="fcl" tabindex="0" role="button" aria-label="FCL (FCFF)"><rect x="918" y="250" width="232" height="58" rx="12"/><text class="nt" x="936" y="279.0" dominant-baseline="central">FCL (FCFF)</text></g><g class="n n-dem" data-id="fcd" tabindex="0" role="button" aria-label="FCD"><rect x="918" y="340" width="232" height="58" rx="12"/><text class="nt" x="936" y="369.0" dominant-baseline="central">FCD</text></g><g class="n n-dem" data-id="fca" tabindex="0" role="button" aria-label="FCA"><rect x="918" y="430" width="232" height="58" rx="12"/><text class="nt" x="936" y="459.0" dominant-baseline="central">FCA</text></g><g class="n n-dem" data-id="dfc" tabindex="0" role="button" aria-label="DFC"><rect x="918" y="520" width="232" height="58" rx="12"/><text class="nt" x="936" y="549.0" dominant-baseline="central">DFC</text></g><g class="n n-dem" data-id="bp" tabindex="0" role="button" aria-label="Balanço"><rect x="918" y="610" width="232" height="58" rx="12"/><text class="nt" x="936" y="639.0" dominant-baseline="central">Balanço</text></g><g class="n n-res" data-id="vplp" tabindex="0" role="button" aria-label="VPL e TIR do projeto"><rect x="1172" y="250" width="232" height="58" rx="12"/><circle class="dot" cx="1384" cy="279.0" r="4"/><text class="nt" x="1190" y="279.0" dominant-baseline="central">VPL e TIR do projeto</text></g><g class="n n-res" data-id="vpla" tabindex="0" role="button" aria-label="VPL e TIR do acionista"><rect x="1172" y="430" width="232" height="58" rx="12"/><circle class="dot" cx="1384" cy="459.0" r="4"/><text class="nt" x="1190" y="459.0" dominant-baseline="central">VPL e TIR do acionista</text></g><g class="n n-res" data-id="sens" tabindex="0" role="button" aria-label="Sensibilidade"><rect x="1172" y="540" width="232" height="58" rx="12"/><circle class="dot" cx="1384" cy="569.0" r="4"/><text class="nt" x="1190" y="569.0" dominant-baseline="central">Sensibilidade</text></g><g class="n n-res" data-id="eq" tabindex="0" role="button" aria-label="Outorga de equilíbrio"><rect x="1172" y="650" width="232" height="58" rx="12"/><circle class="dot" cx="1384" cy="679.0" r="4"/><text class="nt" x="1190" y="679.0" dominant-baseline="central">Outorga de equilíbrio</text></g><g class="n n-res" data-id="rel" tabindex="0" role="button" aria-label="Painel e relatório"><rect x="1172" y="760" width="232" height="58" rx="12"/><circle class="dot" cx="1384" cy="789.0" r="4"/><text class="nt" x="1190" y="789.0" dominant-baseline="central">Painel e relatório</text></g></g></svg></div>
+        <div class="engine-foot">
+          <ul class="engine-legend">
+            <li><svg viewBox="0 0 34 10"><line x1="0" y1="5" x2="34" y2="5" stroke="rgba(201,214,229,.55)" stroke-width="2"/></svg>Fluxo de dados</li>
+            <li><svg viewBox="0 0 34 10"><line x1="0" y1="5" x2="34" y2="5" stroke="#E2B95A" stroke-width="2" stroke-dasharray="6 5"/></svg>Taxa de desconto</li>
+            <li><svg viewBox="0 0 34 10"><line x1="2" y1="5" x2="34" y2="5" stroke="#E2B95A" stroke-width="2.4" stroke-dasharray="2 6" stroke-linecap="round"/></svg>Recálculo do modelo</li>
+          </ul>
+          <span class="engine-hint">Arraste para o lado para ver o fluxo completo.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="audit texture" id="principios">
     <svg class="curve" style="margin:0 0 24px" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H1440 V36 Q720 116 0 36 Z" fill="#FFFFFF"/></svg>
     <div class="wrap">
@@ -579,7 +665,7 @@
           <ul class="principles">
             <li><div><h3>Modelo em valores reais</h3><p>Premissas reais do início ao fim, com o efeito da inflação tratado onde ele de fato existe: depreciação, créditos tributários e capital de giro.</p></div></li>
             <li><div><h3>Tributação brasileira no lucro real</h3><p>IR e CSLL calculados numa base única, com tributos sobre a receita definidos por linha de atividade.</p></div></li>
-            <li><div><h3>Contas que fecham</h3><p>Fluxo do acionista igual ao fluxo livre mais o da dívida, DRE coerente com o caixa, balanço equilibrado.</p></div></li>
+            <li><div><h3>Contas que fecham</h3><p>Fluxos de caixa reconciliados entre si, DRE coerente com o caixa e balanço equilibrado.</p></div></li>
             <li><div><h3>Relatório que embasa a decisão</h3><p>Premissas, demonstrações, gráficos e indicadores num documento técnico pronto para análise.</p></div></li>
           </ul>
         </div>
@@ -627,9 +713,13 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
+      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#motor">Por dentro do motor</a><a href="#principios">Princípios</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
+    </div>
+    <div class="beta-note">
+      <span class="beta-pill">Versão beta</span>
+      <p>O Valora PPP está em desenvolvimento ativo. Os resultados gerados fazem parte do processo de validação do sistema e devem ser conferidos pelo usuário antes de qualquer uso ou decisão.</p>
     </div>
     <div class="legal">
       <span>© <span id="ano">2026</span> Valora PPP</span>
@@ -692,6 +782,43 @@
       if (sc !== wasScrolled) { wasScrolled = sc; fitMarks(); }
     };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+
+    // Fluxograma: destaca as conexões do bloco escolhido
+    (function () {
+      var eng = document.getElementById('engine');
+      if (!eng) return;
+      var nodes = eng.querySelectorAll('.n'), edges = eng.querySelectorAll('.e');
+      var fixed = null;
+      var show = function (id) {
+        if (!id) { eng.classList.remove('focus'); for (var i = 0; i < nodes.length; i++) nodes[i].classList.remove('on', 'sel'); for (var j = 0; j < edges.length; j++) edges[j].classList.remove('on'); return; }
+        eng.classList.add('focus');
+        var on = {}; on[id] = 1;
+        for (var j = 0; j < edges.length; j++) {
+          var a = edges[j].getAttribute('data-a'), b = edges[j].getAttribute('data-b');
+          var hit = a === id || b === id;
+          edges[j].classList.toggle('on', hit);
+          if (hit) { on[a] = 1; on[b] = 1; }
+        }
+        for (var i = 0; i < nodes.length; i++) {
+          var nid = nodes[i].getAttribute('data-id');
+          nodes[i].classList.toggle('on', !!on[nid]);
+          nodes[i].classList.toggle('sel', nid === id);
+        }
+      };
+      for (var i = 0; i < nodes.length; i++) {
+        (function (n) {
+          var id = n.getAttribute('data-id');
+          n.addEventListener('mouseenter', function () { if (!fixed) show(id); });
+          n.addEventListener('mouseleave', function () { if (!fixed) show(null); });
+          n.addEventListener('focus', function () { show(id); });
+          n.addEventListener('blur', function () { if (!fixed) show(null); });
+          n.addEventListener('click', function (ev) { ev.stopPropagation(); fixed = (fixed === id) ? null : id; show(fixed); });
+          n.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); fixed = (fixed === id) ? null : id; show(fixed); } });
+        })(nodes[i]);
+      }
+      document.addEventListener('click', function () { if (fixed) { fixed = null; show(null); } });
+    })();
 
     // Leque de trajetórias: muitos futuros possíveis de um projeto, um caminho em destaque.
     // Desenhado no tamanho real da faixa: nasce embaixo à esquerda e termina no alto à direita.
