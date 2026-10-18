@@ -214,7 +214,50 @@
   }
 
   /* Cartões de funcionalidades */
-  #modelo { background: var(--white); }
+  #modelo { background: var(--paper); }
+
+  /* A origem */
+  #origem { background: var(--white); }
+  .origin-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+  .story p { margin: 0 0 18px; color: var(--ink-soft); max-width: 64ch; }
+  .story p:first-child { color: var(--navy); font-size: 1.22rem; line-height: 1.55; }
+  .story .sign { margin-top: 26px; color: var(--navy); font-weight: 600; }
+  .story .sign span { display: block; font-weight: 400; color: var(--ink-soft); font-size: .98rem; }
+  .finding {
+    background: var(--navy); color: var(--white); border-radius: 18px; padding: 34px 32px 30px;
+    position: relative; overflow: hidden; isolation: isolate;
+  }
+  .finding::after { content: ""; position: absolute; inset: auto -30% -60% auto; width: 80%; height: 120%; background: radial-gradient(closest-side, rgba(201,150,46,.22), transparent); z-index: -1; }
+  .finding .num { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: clamp(3.2rem, 6vw, 4.6rem); line-height: 1; color: var(--gold-soft); letter-spacing: -.02em; }
+  .finding .num small { font-size: .42em; font-weight: 700; margin-left: 6px; color: var(--gold-soft); }
+  .finding p { margin: 14px 0 0; color: var(--mist); font-size: 1.02rem; }
+  .finding .meta { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(201,214,229,.18); font-size: .95rem; color: var(--mist); }
+  .finding .meta b { color: var(--white); font-weight: 600; display: block; margin-bottom: 2px; }
+  .finding .btn { margin-top: 22px; }
+  .timeline { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 8px; right: 8px; top: 8px; height: 2px; background: linear-gradient(90deg, #2F5D8C, #C9962E); }
+  .timeline li { position: relative; padding: 34px 20px 0 0; }
+  .timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--white); border: 3px solid var(--steel); box-sizing: border-box; }
+  .timeline li:last-child::before { border-color: var(--gold); background: var(--gold); }
+  .timeline h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 700; color: var(--navy); }
+  .timeline p { margin: 0; font-size: .97rem; color: var(--ink-soft); }
+  .author { margin-top: 72px; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 36px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 32px; }
+  .author img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px var(--white), 0 0 0 6px var(--gold); }
+  .author .who { font-size: .9rem; color: var(--steel); font-weight: 600; margin: 0 0 4px; }
+  .author h3 { margin: 0 0 10px; font-size: 1.5rem; font-weight: 800; color: var(--navy); }
+  .author p { margin: 0 0 12px; color: var(--ink-soft); max-width: 78ch; }
+  .author .creds { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 14px 0 16px; }
+  .author .creds li { background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; font-size: .9rem; color: var(--navy); }
+  .author a.li { color: var(--steel); font-weight: 600; text-decoration: none; }
+  .author a.li:hover { text-decoration: underline; }
+  @media (max-width: 960px) {
+    .origin-grid { grid-template-columns: 1fr; gap: 32px; }
+    .timeline { grid-template-columns: 1fr; margin-top: 48px; }
+    .timeline::before { left: 8px; right: auto; top: 8px; bottom: 8px; width: 2px; height: auto; background: linear-gradient(#2F5D8C, #C9962E); }
+    .timeline li { padding: 0 0 26px 38px; }
+    .author { grid-template-columns: 1fr; text-align: left; padding: 26px; }
+    .author img { width: 120px; height: 120px; }
+  }
   .cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; counter-reset: etapa; }
   .card {
     counter-increment: etapa;
@@ -350,6 +393,7 @@
     </a>
     <nav aria-label="Principal">
       <a class="hide-sm" href="#concessoes">Concessões</a>
+      <a class="hide-sm" href="#origem">A origem</a>
       <a class="hide-sm" href="#modelo">O modelo</a>
       <a class="hide-sm" href="#contato">Contato</a>
       <a class="login" href="https://app.valorappp.com.br">Acessar o sistema</a>
@@ -395,6 +439,52 @@
         <article class="slice photo" tabindex="0" style="--img:url(img/hospitais.webp)"><div class="lbl"><h3>Hospitais</h3><p>PPPs de construção e gestão, com contraprestação por desempenho.</p></div></article>
         <article class="slice photo" tabindex="0" style="--img:url(img/residuos.webp)"><div class="lbl"><h3>Resíduos sólidos</h3><p>Coleta, triagem e destinação, com receitas por tonelada.</p></div></article>
         <article class="slice photo" tabindex="0" style="--img:url(img/mobilidade.webp)"><div class="lbl"><h3>Mobilidade urbana</h3><p>Metrô, VLT e BRT, com tarifa e demanda de passageiros.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="origem">
+    <div class="wrap">
+      <h2 class="one-line">Nasceu de uma pergunta acadêmica</h2>
+      <div class="origin-grid">
+        <div class="story">
+          <p>Tudo começou com o meu TCC na especialização em Engenharia Econômica e Financeira da UFG. A pergunta era simples de enunciar e difícil de responder: o beta setorial de Damodaran, usado como referência em quase toda modelagem de concessões, representa bem o risco de uma ferrovia brasileira?</p>
+          <p>Comparei esse parâmetro com o beta calculado a partir das ações da Rumo na B3. A diferença pode parecer pequena no papel, mas não é: usar a média global superestimava o risco operacional em 10% e elevava o custo de capital próprio em 1,2 ponto percentual. Em projetos de 30 anos, isso muda a viabilidade de uma concessão.</p>
+          <p>O trabalho recebeu nota 10. Depois disso, resolvi automatizar o cálculo do custo de capital em Python, como forma de aprender programação. Quando o módulo ficou pronto, comecei o curso de modelagem econômico-financeira da FIPE e fui acrescentando o que faltava: Capex, Opex, receitas, inflação e tributos, todos conectados ao WACC original. Depois vieram as demonstrações, os indicadores e o relatório.</p>
+          <p>Assim nasceu o Valora PPP: o rigor de uma pesquisa acadêmica, transformado numa ferramenta para modelar qualquer concessão.</p>
+          <p class="sign">Dalmo Silveira<span>Economista, criador do Valora PPP</span></p>
+        </div>
+        <aside class="finding">
+          <div class="num">+1,2<small>p.p.</small></div>
+          <p>no custo de capital próprio quando se usa a média setorial global, em vez do dado do mercado brasileiro, numa concessão ferroviária.</p>
+          <div class="meta"><b>Comparação entre beta setorial de Damodaran e beta empírico da Rumo S.A. no CAPM ferroviário brasileiro</b>TCC, Especialização em Engenharia Econômica e Financeira, UFG, 2026</div>
+          <a class="btn btn-primary" href="docs/tcc-beta-ferroviario-dalmo-silveira.pdf" target="_blank" rel="noopener">Ler o trabalho completo (PDF)</a>
+        </aside>
+      </div>
+
+      <ol class="timeline">
+        <li><h3>O TCC na UFG</h3><p>Beta de Damodaran contra beta empírico no CAPM ferroviário. Nota 10.</p></li>
+        <li><h3>O primeiro módulo</h3><p>Custo de capital automatizado em Python: CAPM, beta e WACC.</p></li>
+        <li><h3>O curso da FIPE</h3><p>Entram Capex, Opex, receitas, inflação e tributos, ligados ao custo de capital.</p></li>
+        <li><h3>As demonstrações</h3><p>DRE, fluxos de caixa, TIR, VPL e relatório técnico.</p></li>
+        <li><h3>Valora PPP</h3><p>Pedido de registro de marca depositado no INPI e sistema aberto a projetos reais.</p></li>
+      </ol>
+
+      <div class="author">
+        <img src="img/dalmo.webp" alt="Dalmo Silveira" width="168" height="168" loading="lazy">
+        <div>
+          <p class="who">Quem está por trás do Valora PPP</p>
+          <h3>Dalmo Silveira</h3>
+          <p>Economista com mais de 15 anos de experiência em engenharia de custos e finanças, com foco em metodologias de composição de Capex e Opex, formação de preços e modelagem econômico-financeira de projetos de infraestrutura.</p>
+          <ul class="creds">
+            <li>Engenharia Econômica e Financeira · UFG</li>
+            <li>MBA em Finanças, Transporte e Logística · Ibmec</li>
+            <li>MBA em Gestão de Negócios · USP</li>
+            <li>MBI Ferroviário · Senai SP</li>
+            <li>Modelagem Econômico-Financeira · FIPE (em curso)</li>
+          </ul>
+          <a class="li" href="https://www.linkedin.com/in/dalmo-silveira-095b985a/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+        </div>
       </div>
     </div>
   </section>
@@ -505,7 +595,7 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#concessoes">Concessões</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
+      <div><h4>Plataforma</h4><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
     </div>
