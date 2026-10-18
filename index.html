@@ -28,7 +28,7 @@
     --ink-soft: #46597A;
     --line: #D5DFEA;
     --max: 1760px;
-    --head: 84px;
+    --head: 100px;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
@@ -65,13 +65,16 @@
   }
   .top .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--head); gap: 16px; transition: height .25s ease; }
   .top.scrolled { background: rgba(11,31,59,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(201,214,229,.12), 0 10px 30px -12px rgba(3,10,22,.6); }
-  .top.scrolled .wrap { height: 64px; }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .brand .mark { width: 42px; height: auto; flex: none; transition: width .25s ease; }
-  .top.scrolled .brand .mark { width: 34px; }
+  .top.scrolled .wrap { height: 72px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand .mark { width: 62px; height: auto; flex: none; transition: width .25s ease; }
+  .top.scrolled .brand .mark { width: 46px; }
+  .wordmark .name, .wordmark .tag { transition: font-size .25s ease; }
+  .top.scrolled .wordmark .name { font-size: 1.5rem; }
+  .top.scrolled .wordmark .tag { font-size: 0.64rem; }
   .wordmark { display: flex; flex-direction: column; line-height: 1.1; }
-  .wordmark .name { white-space: nowrap; font-weight: 800; font-size: 1.35rem; color: var(--white); letter-spacing: -0.01em; }
-  .wordmark .tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); margin-top: 3px; }
+  .wordmark .name { white-space: nowrap; font-weight: 800; font-size: 1.95rem; color: var(--white); letter-spacing: -0.015em; }
+  .wordmark .tag { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); margin-top: 4px; }
   .top nav { display: flex; gap: 28px; align-items: center; font-size: 1rem; }
   .top nav a { text-decoration: none; color: var(--mist); font-weight: 600; }
   .top nav a:hover { color: var(--white); }
@@ -80,6 +83,8 @@
   @media (max-width: 820px) {
     .top nav .hide-sm { display: none; }
     .wordmark .tag { display: none; }
+    .brand .mark, .top.scrolled .brand .mark { width: 44px; }
+    .wordmark .name, .top.scrolled .wordmark .name { font-size: 1.4rem; }
     .top nav .login { padding: 7px 14px; font-size: 0.92rem; }
   }
 
