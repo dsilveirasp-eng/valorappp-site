@@ -477,15 +477,17 @@
   .ref-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
   /* Parceria técnica */
   .parceria { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; background: var(--white); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
-  .parceria .marca { background: var(--navy); display: flex; align-items: center; justify-content: center; padding: 44px 36px; }
-  .parceria .marca span { background: #C3CFDF; border-radius: 12px; padding: 14px 22px; display: inline-flex; }
-  .parceria .marca img { display: block; width: 100%; max-width: 300px; height: auto; }
+  .parceria .marca { background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 44px 36px; }
+  .parceria .marca img { display: block; width: 100%; max-width: 300px; height: auto; border-radius: 12px; }
   .parceria .texto { padding: 36px 40px; }
   .parceria h3 { font-size: 1.45rem; font-weight: 800; color: var(--navy); margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
   .parceria .selo { font-family: "Montserrat", system-ui, sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--steel); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px 12px; }
   .parceria .sub { font-weight: 600; color: var(--steel); margin: 0 0 14px; }
-  .parceria p { color: var(--ink-soft); margin: 0 0 22px; max-width: 60ch; }
+  .parceria p { color: var(--ink-soft); margin: 0 0 22px; max-width: 60ch; text-align: justify; text-align-last: left; hyphens: none; }
+  #parceria .intro { max-width: 62ch; text-align: justify; text-align-last: left; hyphens: none; }
   .parceria .btn svg { width: 15px; height: 15px; margin-left: 8px; vertical-align: -2px; }
+  .parceria p.sub { text-align: left; }
+  @media (max-width: 899px) { .parceria p, #parceria .intro { text-align: left; } }
   @media (max-width: 899px) { .parceria { grid-template-columns: 1fr; } .parceria .texto { padding: 28px 22px; } .parceria .marca { padding: 32px 22px; } }
   .ref-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 28px 24px; position: relative; }
   .ref-card::before { content: ""; position: absolute; left: 28px; top: 0; width: 36px; height: 3px; background: var(--gold); border-radius: 0 0 3px 3px; }
@@ -714,7 +716,7 @@
       <h2 class="one-line">Parceria técnica</h2>
       <p class="intro wide">Modelagem econômico-financeira e engenharia de custos probabilística: dois olhares complementares sobre o mesmo projeto de concessão.</p>
       <article class="parceria">
-        <div class="marca"><span><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="332" height="78" loading="lazy"></span></div>
+        <div class="marca"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="318" height="87" loading="lazy"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="271" height="65" loading="lazy"></div>
         <div class="texto">
           <h3>MonteRisk <span class="selo">site parceiro</span></h3>
           <p class="sub">Engenharia de Custos Probabilística</p>
