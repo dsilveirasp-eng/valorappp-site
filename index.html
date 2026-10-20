@@ -294,6 +294,21 @@
   .author .creds li { background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; font-size: .9rem; color: var(--navy); }
   .author a.li { color: var(--steel); font-weight: 600; text-decoration: none; }
   .author a.li:hover { text-decoration: underline; }
+  /* Colaboradores técnicos (cartões menores, abaixo do criador) */
+  .colab { margin: -40px 0 72px; }
+  .colab .who { font-size: .9rem; color: var(--steel); font-weight: 600; margin: 0 0 14px; }
+  .colab-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .colab-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 22px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+  .colab-card img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--white), 0 0 0 5px var(--gold); }
+  .colab-card h4 { margin: 0 0 4px; font-family: "Montserrat", sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+  .colab-card .cargo { margin: 0 0 10px; font-size: .92rem; font-weight: 600; color: var(--steel); }
+  .colab-card p { margin: 0 0 10px; color: var(--ink-soft); font-size: .98rem; }
+  .colab-card .creds { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 10px 0 12px; }
+  .colab-card .creds li { background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .84rem; color: var(--navy); }
+  .colab-card a.li { color: var(--steel); font-weight: 600; text-decoration: none; }
+  .colab-card a.li:hover { text-decoration: underline; }
+  @media (max-width: 960px) { .colab-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .colab-card { grid-template-columns: 1fr; } .colab-card img { width: 88px; height: 88px; } }
   @media (max-width: 960px) {
     .origin-grid { grid-template-columns: 1fr; gap: 32px; }
     .timeline { grid-template-columns: 1fr; margin-top: 48px; }
@@ -714,6 +729,31 @@
             <li>Modelagem Econômico-Financeira · FIPE (em curso)</li>
           </ul>
           <a class="li" href="https://www.linkedin.com/in/dalmo-silveira-095b985a/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+        </div>
+      </div>
+      <div class="colab">
+        <p class="who">Colaboradores técnicos</p>
+        <div class="colab-grid">
+        <div class="colab-card">
+          <img src="img/colaboradores/anderson-calesso-izidoro.webp" alt="Foto de Anderson Calesso Izidoro" width="320" height="320" loading="lazy">
+          <div>
+            <h4>Anderson Calesso Izidoro</h4>
+            <p class="cargo">Engenheiro Eletricista | Especialista em Engenharia de Custos</p>
+            <p>Engenheiro de custos com mais de 20 anos de experiência em infraestrutura metroferroviária, responsável técnico por orçamentos de obras civis, via permanente e sistemas. Desenvolvedor de referências públicas de custos setoriais, com sólida atuação em formação de Capex e Opex, análise de riscos e reequilíbrio econômico-financeiro.</p>
+            <ul class="creds"><li>Engenharia Elétrica</li><li>MBA em Gestão em Engenharia de Custos e Gestão Estratégica de Custos</li><li>CP³P-F · Certified PPP Professional</li></ul>
+            <a class="li" href="https://www.linkedin.com/in/anderson-calesso-izidoro-cp%C2%B3p-f-3b86401b3/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+          </div>
+        </div>
+        <div class="colab-card">
+          <img src="img/colaboradores/vagner-carrara.webp" alt="Foto de Vagner Carrara" width="320" height="320" loading="lazy">
+          <div>
+            <h4>Vagner Carrara</h4>
+            <p class="cargo">Economista | Especialista em Engenharia de Custos, Modelagem Econômico-Financeira e BDI</p>
+            <p>Economista e mestre na área, com sólida atuação em engenharia de custos, formação de preços, cálculo de BDI e modelagens de Capex e Opex para obras e investimentos. Especialista em sistemas referenciais de preços (SIEC, SINAPI, SICRO) e no desenvolvimento de boletins econômicos e índices paramétricos de reajuste contratual.</p>
+            <ul class="creds"><li>Mestrado em Economia</li><li>Graduação em Economia</li></ul>
+            <a class="li" href="https://www.linkedin.com/in/vagner-carrara/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+          </div>
+        </div>
         </div>
       </div>
       <h2 class="one-line">A origem do Valora PPP</h2>
