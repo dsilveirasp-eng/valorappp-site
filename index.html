@@ -485,10 +485,12 @@
   .parceria h3 { font-size: 1.45rem; font-weight: 800; color: var(--navy); margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
   .parceria .selo { font-family: "Montserrat", system-ui, sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--steel); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px 12px; }
   .parceria .sub { font-weight: 600; color: var(--steel); margin: 0 0 14px; }
-  .parceria p { color: var(--ink-soft); margin: 0 0 22px; max-width: 60ch; text-align: justify; text-align-last: left; hyphens: none; }
+  .parceria p { color: var(--ink-soft); margin: 0 0 14px; max-width: 60ch; text-align: justify; text-align-last: left; hyphens: none; }
   #parceria .intro { max-width: 62ch; text-align: justify; text-align-last: left; hyphens: none; }
   .parceria .btn svg { width: 15px; height: 15px; margin-left: 8px; vertical-align: -2px; }
   .parceria p.sub { text-align: left; }
+  .parceria .tags { list-style: none; padding: 0; margin: 10px 0 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .parceria .tags li { font-family: "Montserrat", system-ui, sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--navy); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
   @media (max-width: 899px) { .parceria p, #parceria .intro { text-align: left; } }
   @media (max-width: 899px) { .parceria { grid-template-columns: 1fr; } .parceria .texto { padding: 28px 22px; } .parceria .marca { padding: 32px 22px; } }
   .ref-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 28px 24px; position: relative; }
@@ -716,14 +718,16 @@
   <section class="sec" id="parceria">
     <div class="wrap">
       <h2 class="one-line">Parceria técnica</h2>
-      <p class="intro wide">Modelagem econômico-financeira e engenharia de custos probabilística: dois olhares complementares sobre o mesmo projeto de concessão.</p>
+      <p class="intro wide">Quanto custa cada risco transferido ao parceiro privado em um contrato de longo prazo? É a pergunta que a matriz de riscos qualitativa não responde, e que a MonteRisk quantifica.</p>
       <article class="parceria">
         <div class="marca"><div class="logo claro"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="640" height="142" loading="lazy"></div><div class="logo"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="688" height="165" loading="lazy"></div></div>
         <div class="texto">
           <h3>MonteRisk <span class="selo">site parceiro</span></h3>
-          <p class="sub">Engenharia de Custos Probabilística</p>
-          <p>O Valora PPP e a MonteRisk mantêm uma parceria técnica: a análise probabilística de custos da MonteRisk e a modelagem econômico-financeira do Valora PPP se complementam na avaliação de concessões e PPPs.</p>
-          <a class="btn btn-outline" href="https://www.monterisk.com.br/" target="_blank" rel="noopener">Conhecer a MonteRisk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M12 9.5V13H3V4h3.5"/></svg></a>
+          <p class="sub">Quantificação de riscos para obras, concessões e PPPs</p>
+          <p>Duas soluções na mesma plataforma, com a mesma base técnica. Em obras com contratação integrada e semi-integrada, a MonteRisk calcula a taxa de risco a partir da matriz de riscos, com nível de confiança e Índice de Maturidade do Projeto (IMP).</p>
+          <p>Em concessões e PPPs, o MonteRisk Concessões parte do modelo financeiro e da matriz de riscos do contrato, liga cada risco a quem responde por ele e aos componentes do fluxo de caixa que afeta, e estende a simulação de Monte Carlo a horizontes de 20 a 35 anos, com premissas, fontes e critérios registrados para órgãos de controle, financiadores e estruturadores.</p>
+          <ul class="tags"><li>Matriz de riscos</li><li>Simulação de Monte Carlo</li><li>Relatório auditável</li><li>Projetos na nuvem</li></ul>
+          <a class="btn btn-outline" href="https://www.monterisk.com.br/" target="_blank" rel="noopener">Acessar o site da MonteRisk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M12 9.5V13H3V4h3.5"/></svg></a>
         </div>
       </article>
     </div>
