@@ -475,6 +475,18 @@
   /* Referências bibliográficas */
   #referencias { background: var(--paper); border-top: 1px solid var(--line); }
   .ref-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  /* Parceria técnica */
+  .parceria { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; background: var(--white); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .parceria .marca { background: var(--navy); display: flex; align-items: center; justify-content: center; padding: 44px 36px; }
+  .parceria .marca span { background: #C3CFDF; border-radius: 12px; padding: 14px 22px; display: inline-flex; }
+  .parceria .marca img { display: block; width: 100%; max-width: 300px; height: auto; }
+  .parceria .texto { padding: 36px 40px; }
+  .parceria h3 { font-size: 1.45rem; font-weight: 800; color: var(--navy); margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+  .parceria .selo { font-family: "Montserrat", system-ui, sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--steel); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px 12px; }
+  .parceria .sub { font-weight: 600; color: var(--steel); margin: 0 0 14px; }
+  .parceria p { color: var(--ink-soft); margin: 0 0 22px; max-width: 60ch; }
+  .parceria .btn svg { width: 15px; height: 15px; margin-left: 8px; vertical-align: -2px; }
+  @media (max-width: 899px) { .parceria { grid-template-columns: 1fr; } .parceria .texto { padding: 28px 22px; } .parceria .marca { padding: 32px 22px; } }
   .ref-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 28px 24px; position: relative; }
   .ref-card::before { content: ""; position: absolute; left: 28px; top: 0; width: 36px; height: 3px; background: var(--gold); border-radius: 0 0 3px 3px; }
   .ref-card h3 { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 1.08rem; line-height: 1.3; color: var(--navy); margin: 4px 0 6px; }
@@ -697,6 +709,22 @@
     </div>
   </section>
 
+  <section class="sec" id="parceria">
+    <div class="wrap">
+      <h2 class="one-line">Parceria técnica</h2>
+      <p class="intro wide">Modelagem econômico-financeira e engenharia de custos probabilística: dois olhares complementares sobre o mesmo projeto de concessão.</p>
+      <article class="parceria">
+        <div class="marca"><span><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="332" height="78" loading="lazy"></span></div>
+        <div class="texto">
+          <h3>MonteRisk <span class="selo">site parceiro</span></h3>
+          <p class="sub">Engenharia de Custos Probabilística</p>
+          <p>O Valora PPP e a MonteRisk mantêm uma parceria técnica: a análise probabilística de custos da MonteRisk e a modelagem econômico-financeira do Valora PPP se complementam na avaliação de concessões e PPPs.</p>
+          <a class="btn btn-outline" href="https://www.monterisk.com.br/" target="_blank" rel="noopener">Conhecer a MonteRisk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M12 9.5V13H3V4h3.5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="sec" id="referencias">
     <div class="wrap">
       <h2 class="one-line">Referências bibliográficas</h2>
@@ -745,7 +773,7 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#motor">Por dentro do motor</a><a href="#principios">Princípios</a><a href="#referencias">Referências</a></div>
+      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#concessoes">Concessões</a><a href="#origem">A origem</a><a href="#modelo">O modelo</a><a href="#motor">Por dentro do motor</a><a href="#principios">Princípios</a><a href="#parceria">Parceria técnica</a><a href="#referencias">Referências</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
     </div>
