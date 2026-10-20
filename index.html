@@ -478,7 +478,9 @@
   /* Parceria técnica */
   .parceria { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; background: var(--white); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
   .parceria .marca { background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 44px 36px; }
-  .parceria .marca img { display: block; width: 100%; max-width: 300px; height: auto; border-radius: 12px; }
+  .parceria .marca .logo { width: 100%; max-width: 320px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .parceria .marca .logo img { display: block; width: 100%; height: auto; }
+  .parceria .marca .logo.claro { background: #EEF2F7; padding: 14px 18px; }
   .parceria .texto { padding: 36px 40px; }
   .parceria h3 { font-size: 1.45rem; font-weight: 800; color: var(--navy); margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
   .parceria .selo { font-family: "Montserrat", system-ui, sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--steel); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px 12px; }
@@ -716,7 +718,7 @@
       <h2 class="one-line">Parceria técnica</h2>
       <p class="intro wide">Modelagem econômico-financeira e engenharia de custos probabilística: dois olhares complementares sobre o mesmo projeto de concessão.</p>
       <article class="parceria">
-        <div class="marca"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="318" height="87" loading="lazy"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="271" height="65" loading="lazy"></div>
+        <div class="marca"><div class="logo claro"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="640" height="142" loading="lazy"></div><div class="logo"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="688" height="165" loading="lazy"></div></div>
         <div class="texto">
           <h3>MonteRisk <span class="selo">site parceiro</span></h3>
           <p class="sub">Engenharia de Custos Probabilística</p>
