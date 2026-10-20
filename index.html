@@ -284,7 +284,7 @@
   .timeline li:last-child::before { border-color: var(--gold); background: var(--gold); }
   .timeline h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 700; color: var(--navy); }
   .timeline p { margin: 0; font-size: .97rem; color: var(--ink-soft); }
-  .author.first { margin: 0 0 72px; }
+  .author.first { margin: 0 0 48px; }
   .author { margin-top: 72px; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 36px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 32px; }
   .author img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px var(--white), 0 0 0 6px var(--gold); }
   .author .who { font-size: .9rem; color: var(--steel); font-weight: 600; margin: 0 0 4px; }
@@ -296,7 +296,7 @@
   .author a.li { color: var(--steel); font-weight: 600; text-decoration: none; }
   .author a.li:hover { text-decoration: underline; }
   /* Colaboradores técnicos (cartões menores, abaixo do criador) */
-  .colab { margin: -40px 0 72px; }
+  .colab { margin: 72px 0 0; }
   .colab .who { font-size: .9rem; color: var(--steel); font-weight: 600; margin: 0 0 14px; }
   .colab-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .colab-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 22px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
@@ -559,8 +559,8 @@
       <a class="hide-sm hide-md" href="#motor">Por dentro</a>
       <a class="hide-sm" href="#concessoes">Concessões</a>
       <a class="hide-sm" href="#modelo">O modelo</a>
-      <a class="hide-sm" href="#parceria">MonteRisk</a>
       <a class="hide-sm" href="#origem">Origem</a>
+      <a class="hide-sm" href="#parceria">MonteRisk</a>
       <a class="hide-sm" href="#contato">Contato</a>
       <a class="login" href="https://app.valorappp.com.br">Acessar o sistema</a>
     </nav>
@@ -697,23 +697,6 @@
     </div>
   </section>
 
-  <section class="sec" id="parceria">
-    <div class="wrap">
-      <h2 class="one-line">Parceria técnica</h2>
-      <article class="parceria">
-        <div class="marca"><div class="logo claro"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="640" height="142" loading="lazy"></div><div class="logo"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="688" height="165" loading="lazy"></div></div>
-        <div class="texto">
-          <h3>MonteRisk <span class="selo">site parceiro</span></h3>
-          <p class="sub">Quantificação de riscos para obras, concessões e PPPs</p>
-          <p>Duas soluções na mesma plataforma, com a mesma base técnica. Em obras com contratação integrada e semi-integrada, a MonteRisk calcula a taxa de risco a partir da matriz de riscos, com nível de confiança e Índice de Maturidade do Projeto (IMP).</p>
-          <p>Em concessões e PPPs, o MonteRisk Concessões parte do modelo financeiro e da matriz de riscos do contrato, liga cada risco a quem responde por ele e aos componentes do fluxo de caixa que afeta, e estende a simulação de Monte Carlo a horizontes de 20 a 35 anos, com premissas, fontes e critérios registrados para órgãos de controle, financiadores e estruturadores.</p>
-          <ul class="tags"><li>Matriz de riscos</li><li>Simulação de Monte Carlo</li><li>Relatório auditável</li><li>Projetos na nuvem</li></ul>
-          <a class="btn btn-outline" href="https://www.monterisk.com.br/" target="_blank" rel="noopener">Acessar o site da MonteRisk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M12 9.5V13H3V4h3.5"/></svg></a>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <section class="sec" id="origem">
     <div class="wrap">
       <div class="author first">
@@ -732,31 +715,6 @@
             <li>Modelagem Econômico-Financeira (em curso)</li>
           </ul>
           <a class="li" href="https://www.linkedin.com/in/dalmo-silveira-095b985a/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
-        </div>
-      </div>
-      <div class="colab">
-        <p class="who">Colaboração técnica</p>
-        <div class="colab-grid">
-        <div class="colab-card">
-          <img src="img/colaboradores/anderson-calesso-izidoro.webp" alt="Foto de Anderson Calesso Izidoro" width="320" height="320" loading="lazy">
-          <div>
-            <h4>Anderson Calesso Izidoro</h4>
-            <p class="cargo">Engenheiro Eletricista | Especialista em Engenharia de Custos</p>
-            <p>Engenheiro de custos com mais de 20 anos de experiência em infraestrutura metroferroviária, responsável técnico por orçamentos de obras civis, via permanente e sistemas. Desenvolvedor de referências públicas de custos setoriais, com sólida atuação em formação de Capex e Opex, análise de riscos e reequilíbrio econômico-financeiro.</p>
-            <ul class="creds"><li>Engenharia Elétrica</li><li>MBA em Gestão em Engenharia de Custos e Gestão Estratégica de Custos</li><li>CP³P-F · Certified PPP Professional</li></ul>
-            <a class="li" href="https://www.linkedin.com/in/anderson-calesso-izidoro-cp%C2%B3p-f-3b86401b3/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
-          </div>
-        </div>
-        <div class="colab-card">
-          <img src="img/colaboradores/vagner-carrara.webp" alt="Foto de Vagner Carrara" width="320" height="320" loading="lazy">
-          <div>
-            <h4>Vagner Carrara</h4>
-            <p class="cargo">Economista | Especialista em Engenharia de Custos, Modelagem Econômico-Financeira e BDI</p>
-            <p>Economista e mestre na área, com sólida atuação em engenharia de custos, formação de preços, cálculo de BDI e modelagens de Capex e Opex para obras e investimentos. Especialista em sistemas referenciais de preços (SIEC, SINAPI, SICRO) e no desenvolvimento de boletins econômicos e índices paramétricos de reajuste contratual.</p>
-            <ul class="creds"><li>Mestrado em Economia</li><li>Graduação em Economia</li></ul>
-            <a class="li" href="https://www.linkedin.com/in/vagner-carrara/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
-          </div>
-        </div>
         </div>
       </div>
       <h2 class="one-line">A origem do Valora PPP</h2>
@@ -784,6 +742,48 @@
         <li><h3>Valora PPP</h3><p>Pedido de registro de marca depositado no INPI e sistema aberto a projetos reais.</p></li>
       </ol>
 
+      <div class="colab">
+        <p class="who">Colaboração técnica</p>
+        <div class="colab-grid">
+        <div class="colab-card">
+          <img src="img/colaboradores/anderson-calesso-izidoro.webp" alt="Foto de Anderson Calesso Izidoro" width="320" height="320" loading="lazy">
+          <div>
+            <h4>Anderson Calesso Izidoro</h4>
+            <p class="cargo">Engenheiro Eletricista | Especialista em Engenharia de Custos</p>
+            <p>Engenheiro de custos com mais de 20 anos de experiência em infraestrutura metroferroviária, responsável técnico por orçamentos de obras civis, via permanente e sistemas. Desenvolvedor de referências públicas de custos setoriais, com sólida atuação em formação de Capex e Opex, análise de riscos e reequilíbrio econômico-financeiro.</p>
+            <ul class="creds"><li>Engenharia Elétrica</li><li>MBA em Gestão em Engenharia de Custos e Gestão Estratégica de Custos</li><li>CP³P-F · Certified PPP Professional</li></ul>
+            <a class="li" href="https://www.linkedin.com/in/anderson-calesso-izidoro-cp%C2%B3p-f-3b86401b3/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+          </div>
+        </div>
+        <div class="colab-card">
+          <img src="img/colaboradores/vagner-carrara.webp" alt="Foto de Vagner Carrara" width="320" height="320" loading="lazy">
+          <div>
+            <h4>Vagner Carrara</h4>
+            <p class="cargo">Economista | Especialista em Engenharia de Custos, Modelagem Econômico-Financeira e BDI</p>
+            <p>Economista e mestre na área, com sólida atuação em engenharia de custos, formação de preços, cálculo de BDI e modelagens de Capex e Opex para obras e investimentos. Especialista em sistemas referenciais de preços (SIEC, SINAPI, SICRO) e no desenvolvimento de boletins econômicos e índices paramétricos de reajuste contratual.</p>
+            <ul class="creds"><li>Mestrado em Economia</li><li>Graduação em Economia</li></ul>
+            <a class="li" href="https://www.linkedin.com/in/vagner-carrara/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="parceria">
+    <div class="wrap">
+      <h2 class="one-line">Parceria técnica</h2>
+      <article class="parceria">
+        <div class="marca"><div class="logo claro"><img src="img/parceiros/monterisk.png" alt="MonteRisk — Engenharia de Custos Probabilística" width="640" height="142" loading="lazy"></div><div class="logo"><img src="img/parceiros/monterisk-concessoes.png" alt="MonteRisk — Concessões &amp; PPPs" width="688" height="165" loading="lazy"></div></div>
+        <div class="texto">
+          <h3>MonteRisk <span class="selo">site parceiro</span></h3>
+          <p class="sub">Quantificação de riscos para obras, concessões e PPPs</p>
+          <p>Duas soluções na mesma plataforma, com a mesma base técnica. Em obras com contratação integrada e semi-integrada, a MonteRisk calcula a taxa de risco a partir da matriz de riscos, com nível de confiança e Índice de Maturidade do Projeto (IMP).</p>
+          <p>Em concessões e PPPs, o MonteRisk Concessões parte do modelo financeiro e da matriz de riscos do contrato, liga cada risco a quem responde por ele e aos componentes do fluxo de caixa que afeta, e estende a simulação de Monte Carlo a horizontes de 20 a 35 anos, com premissas, fontes e critérios registrados para órgãos de controle, financiadores e estruturadores.</p>
+          <ul class="tags"><li>Matriz de riscos</li><li>Simulação de Monte Carlo</li><li>Relatório auditável</li><li>Projetos na nuvem</li></ul>
+          <a class="btn btn-outline" href="https://www.monterisk.com.br/" target="_blank" rel="noopener">Acessar o site da MonteRisk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M12 9.5V13H3V4h3.5"/></svg></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -835,7 +835,7 @@
       </div>
     </div>
     <div class="cols">
-      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#motor">Por dentro do motor</a><a href="#concessoes">Concessões</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a><a href="#parceria">Parceria técnica</a><a href="#origem">Origem</a><a href="#referencias">Referências</a></div>
+      <div><h4>Plataforma</h4><a href="#proposito">Propósito</a><a href="#motor">Por dentro do motor</a><a href="#concessoes">Concessões</a><a href="#modelo">O modelo</a><a href="#principios">Princípios</a><a href="#origem">Origem</a><a href="#parceria">Parceria técnica</a><a href="#referencias">Referências</a></div>
       <div><h4>Acesso</h4><a href="https://app.valorappp.com.br">Acessar o sistema</a><a href="#contato">Solicitar demonstração</a></div>
       <div><h4>Contato</h4><a href="mailto:contato@valorappp.com.br">contato@valorappp.com.br</a></div>
     </div>
